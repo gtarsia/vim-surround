@@ -411,6 +411,7 @@ function! s:dosurround(...) " {{{1
     " Do nothing
     " call setreg('"','')
   " elseif char =~ "[\"'`]"
+  if char =~ "[\"'`]" " (tmp)
     exe "norm! i \<Esc>d2i".char
     " call setreg('"',substitute(getreg('"'),' ','',''))
   " elseif char == '/'
@@ -420,11 +421,11 @@ function! s:dosurround(...) " {{{1
   " elseif char =~# '[[:punct:][:space:]]' && char !~# '[][(){}<>]'
     " exe 'norm! F'.char
     " exe 'norm! df'.char
-  " else
+  else
     " One character backwards
-    " call search('\m.', 'bW')
-    " exe "norm! da".char
-  " endif
+    call search('\m.', 'bW')
+    exe "norm! da".char
+  endif
   " let removed = getreg('"')
   " let rem2 = substitute(removed,'\n.*','','')
   " let oldhead = strpart(oldline,0,strlen(oldline)-strlen(rem2))
