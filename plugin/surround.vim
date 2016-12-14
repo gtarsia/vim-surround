@@ -432,9 +432,10 @@ function! s:dosurround(...) " {{{1
   " let oldtail = strpart(oldline,  strlen(oldline)-strlen(rem2))
   let regtype = getregtype('"')
   " if char =~# '[\[({<T]' || spc
-  "   let keeper = substitute(keeper,'^\s\+','','')
-  "   let keeper = substitute(keeper,'\s\+$','','')
-  " endif
+  if char =~# '[\[({<]' " (tmp)
+    let keeper = substitute(keeper,'^\s\+','','')
+    let keeper = substitute(keeper,'\s\+$','','')
+  endif
   " if col("']") == col("$") && col('.') + 1 == col('$')
   "   if oldhead =~# '^\s*$' && a:0 < 2
   "     let keeper = substitute(keeper,'\%^\n'.oldhead.'\(\s*.\{-\}\)\n\s*\%$','\1','')
