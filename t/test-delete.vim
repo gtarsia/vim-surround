@@ -14,10 +14,24 @@ describe 'delete surround'
     close!
   end
 
+  it 'deletes surrounding single quotes'
+    put! = \"\'world\'\"
+    Expect getline(1) == "\'world\'"
+    normal ds'
+    Expect getline(1) == 'world'
+  end
+
   it 'deletes surrounding double quotes'
     put! = '\"world\"'
     Expect getline(1) == '"world"'
     normal ds"
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding backticks'
+    put! = '`world`'
+    Expect getline(1) == '`world`'
+    normal ds`
     Expect getline(1) == 'world'
   end
 
