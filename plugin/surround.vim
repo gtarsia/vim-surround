@@ -364,12 +364,12 @@ function! s:dosurround(...) " {{{1
   "   let char = strpart(char,1)
     " let spc = 1
   " endif
-  " if char == 'a'
-  "   let char = '>'
-  " endif
-  " if char == 'r'
-  "   let char = ']'
-  " endif
+  if char == 'a'
+    let char = '>'
+  endif
+  if char == 'r'
+    let char = ']'
+  endif
   " let newchar = ""
   " if a:0 > 1
     " let newchar = a:2

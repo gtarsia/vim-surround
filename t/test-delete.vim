@@ -37,6 +37,14 @@ describe 'delete surround'
     Expect getline(1) == '_world_'
   end
 
+  it 'deletes surrounding parenthesis (aliased)'
+    put! = '_( world )_'
+    normal f(
+    Expect CursorChar() == '('
+    normal dsb
+    Expect getline(1) == '_ world _'
+  end
+
   it 'deletes surrounding square brackets'
     put! = '_[ world ]_'
     normal f[
@@ -51,6 +59,14 @@ describe 'delete surround'
     Expect CursorChar() == '['
     normal ds[
     Expect getline(1) == '_world_'
+  end
+
+  it 'deletes surrounding square brackets (aliased)'
+    put! = '_[ world ]_'
+    normal f[
+    Expect CursorChar() == '['
+    normal dsr
+    Expect getline(1) == '_ world _'
   end
 
   it 'deletes surrounding curly brackets'
@@ -69,6 +85,14 @@ describe 'delete surround'
     Expect getline(1) == '_world_'
   end
 
+  it 'deletes surrounding curly brackets (aliased)'
+    put! = '_{ world }_'
+    normal f{
+    Expect CursorChar() == '{'
+    normal dsB
+    Expect getline(1) == '_ world _'
+  end
+
   it 'deletes surrounding angle brackets'
     put! = '_< world >_'
     normal f<
@@ -83,6 +107,14 @@ describe 'delete surround'
     Expect CursorChar() == '<'
     normal ds<
     Expect getline(1) == '_world_'
+  end
+
+  it 'deletes surrounding angle brackets (aliased)'
+    put! = '_< world >_'
+    normal f<
+    Expect CursorChar() == '<'
+    normal dsa
+    Expect getline(1) == '_ world _'
   end
 
 end
