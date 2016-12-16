@@ -131,4 +131,18 @@ describe 'delete surround'
     Expect getline(1) == '_ world _'
   end
 
+  it 'ignores non-surrounding input character (clean reg)'
+    call setreg('"', "")
+    put! = '(world)'
+    normal ds]
+    Expect getline(1) == '(world)'
+  end
+
+  it 'ignores non-surrounding input character (dirty reg)'
+    call setreg('"', "something")
+    put! = '(world)'
+    normal ds]
+    Expect getline(1) == '(world)'
+  end
+
 end
