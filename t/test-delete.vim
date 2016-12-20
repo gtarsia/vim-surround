@@ -131,10 +131,18 @@ describe 'delete surround'
     Expect getline(1) == '_ world _'
   end
 
-  it 'deletes surrounding spaces'
+  it 'deletes surrounding spaces, when cursor at the beginning of word'
     put! = 'hello world hello'
     normal fw
     Expect CursorChar() == 'w'
+    execute "normal ds\<space>\<space>"
+    Expect getline(1) == 'helloworldhello'
+  end
+
+  it 'deletes surrounding spaces, when cursor in the middle of word'
+    put! = 'hello world hello'
+    normal fr
+    Expect CursorChar() == 'r'
     execute "normal ds\<space>\<space>"
     Expect getline(1) == 'helloworldhello'
   end
