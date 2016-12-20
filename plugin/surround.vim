@@ -390,9 +390,9 @@ function! s:dosurround(...) " {{{1
   " elseif char =~# '[[:punct:][:space:]]' && char !~# '[][(){}<>"''`]'
   if char =~# '[[:space:]]' " (tmp)
     exe 'norm! T'.char
-  "   if getline('.')[col('.')-1] == char
-  "     exe 'norm! l'
-  "   endif
+    if getline('.')[col('.')-1] == char
+      exe 'norm! l'
+    endif
     exe 'norm! dt'.char
   else
     exe 'norm! d'.strcount.'i'.char

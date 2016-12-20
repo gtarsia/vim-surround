@@ -147,6 +147,16 @@ describe 'delete surround'
     Expect getline(1) == 'helloworldhello'
   end
 
+  it 'deletes surrounding spaces, when cursor in the very first space'
+    put! = 'hello world good morning'
+    " usually if cursor is on space, it's interpreted as a closing space
+    " but if it's the very first space, it's interpreted as an opening space
+    execute "normal f\<space>"
+    Expect CursorChar() == ' '
+    execute "normal ds\<space>\<space>"
+    Expect getline(1) == 'helloworldgood morning'
+  end
+
   it 'ignores non-surrounding input character (clean reg)'
     call setreg('"', "")
     put! = '(world)'
