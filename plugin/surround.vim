@@ -388,14 +388,15 @@ function! s:dosurround(...) " {{{1
   " if char == '/'
     " exe 'norm! '.strcount.'[/d'.strcount.']/'
   " elseif char =~# '[[:punct:][:space:]]' && char !~# '[][(){}<>"''`]'
-  "   exe 'norm! T'.char
+  if char =~# '[[:space:]]' " (tmp)
+    " exe 'norm! T'.char
   "   if getline('.')[col('.')-1] == char
   "     exe 'norm! l'
   "   endif
-  "   exe 'norm! dt'.char
-  " else
+    exe 'norm! dt'.char
+  else
     exe 'norm! d'.strcount.'i'.char
-  " endif
+  endif
   let keeper = getreg('"')
   " let okeeper = keeper " for reindent below
   if keeper == ""
@@ -418,8 +419,9 @@ function! s:dosurround(...) " {{{1
     " call setreg('"','/**/',"c")
     " let keeper = substitute(substitute(keeper,'^/\*\s\=','',''),'\s\=\*$','','')
   " elseif char =~# '[[:punct:][:space:]]' && char !~# '[][(){}<>]'
-    " exe 'norm! F'.char
-    " exe 'norm! df'.char
+  elseif char =~# '[[:space:]]' " (tmp)
+    exe 'norm! F'.char
+    exe 'norm! df'.char
   else
     " One character backwards
     call search('\m.', 'bW')
