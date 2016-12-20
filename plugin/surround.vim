@@ -380,8 +380,8 @@ function! s:dosurround(...) " {{{1
   " let cb_save = &clipboard
   " set clipboard-=unnamed clipboard-=unnamedplus
   " let append = ""
-  " let original = getreg('"')
-  " let otype = getregtype('"')
+  let original = getreg('"')
+  let otype = getregtype('"')
   call setreg('"',"")
   let strcount = "" " (tmp)
   " let strcount = (scount == 1 ? "" : scount)
@@ -458,7 +458,7 @@ function! s:dosurround(...) " {{{1
   " if getline('.') =~ '^\s\+$' && keeper =~ '^\s*\n'
   "   silent norm! cc
   " endif
-  " call setreg('"',original,otype)
+  call setreg('"',original,otype)
   " let s:lastdel = removed
   " let &clipboard = cb_save
   " if newchar == ""

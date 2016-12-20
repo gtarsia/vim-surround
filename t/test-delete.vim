@@ -145,4 +145,22 @@ describe 'delete surround'
     Expect getline(1) == '(world)'
   end
 
+  it 'preserves unnamed register on success'
+    call setreg('"', "something", "b")
+    put! = '(world)'
+    normal ds)
+    Expect getline(1) == 'world'
+    Expect getreg('"') == 'something'
+    Expect getregtype('"') == "\x169"
+  end
+
+  it 'preserves unnamed register on failure'
+    call setreg('"', "something", "b")
+    put! = '(world)'
+    normal ds]
+    Expect getline(1) == '(world)'
+    Expect getreg('"') == 'something'
+    Expect getregtype('"') == "\x169"
+  end
+
 end
