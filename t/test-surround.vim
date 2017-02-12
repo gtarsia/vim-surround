@@ -1,5 +1,5 @@
 source plugin/surround.vim
-source t/util.vim
+source t/util/util.vim
 
 describe 'ys'
 
