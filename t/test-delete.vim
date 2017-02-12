@@ -1,10 +1,7 @@
 source plugin/surround.vim
+source t/util.vim
 
-function! CursorChar()
-    return getline('.')[col('.')-1]
-endfunction
-
-describe 'delete surround'
+describe 'ds'
 
   before
     new

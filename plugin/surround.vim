@@ -33,17 +33,17 @@ function! s:inputtarget()
   " endif
 endfunction
 
-" function! s:inputreplacement()
-"   let c = s:getchar()
+function! s:inputreplacement()
+  let c = s:getchar()
   " if c == " "
   "   let c .= s:getchar()
   " endif
   " if c =~ "\<Esc>" || c =~ "\<C-C>"
   "   return ""
   " else
-    " return c
+    return c
   " endif
-" endfunction
+endfunction
 
 " function! s:beep()
 "   exe "norm! \<Esc>"
@@ -124,9 +124,9 @@ endfunction
 "   return s
 " endfunction
 
-" function! s:wrap(string,char,type,removed,special)
-"   let keeper = a:string
-"   let newchar = a:char
+function! s:wrap(string,char,type,removed,special)
+  let keeper = a:string
+  let newchar = a:char
 "   let s:input = ""
 "   let type = a:type
 "   let linemode = type ==# 'V' ? 1 : 0
@@ -245,8 +245,8 @@ endfunction
 "     let before = "{\n\t"
 "     let after  = "\n}"
 "   elseif newchar !~ '\a'
-"     let before = newchar
-"     let after  = newchar
+    let before = newchar
+    let after  = newchar
 "   else
 "     let before = ''
 "     let after  = ''
@@ -285,22 +285,22 @@ endfunction
 "     let keeper = before.keeper.after
 "   elseif type =~ "^\<C-V>"
 "     " Really we should be iterating over the buffer
-"     let repl = substitute(before,'[\\~]','\\&','g').'\1'.substitute(after,'[\\~]','\\&','g')
+    let repl = substitute(before,'[\\~]','\\&','g').'\1'.substitute(after,'[\\~]','\\&','g')
 "     let repl = substitute(repl,'\n',' ','g')
-"     let keeper = substitute(keeper."\n",'\(.\{-\}\)\(\n\)',repl.'\n','g')
+    let keeper = substitute(keeper."\n",'\(.\{-\}\)\(\n\)',repl.'\n','g')
 "     let keeper = substitute(keeper,'\n\%$','','')
 "   else
 "     let keeper = before.extraspace.keeper.extraspace.after
 "   endif
-"   return keeper
-" endfunction
+  return keeper
+endfunction
 
-" function! s:wrapreg(reg,char,removed,special)
-"   let orig = getreg(a:reg)
-"   let type = substitute(getregtype(a:reg),'\d\+$','','')
-"   let new = s:wrap(orig,a:char,type,a:removed,a:special)
-"   call setreg(a:reg,new,type)
-" endfunction
+function! s:wrapreg(reg,char,removed,special)
+  let orig = getreg(a:reg)
+  let type = substitute(getregtype(a:reg),'\d\+$','','')
+  let new = s:wrap(orig,a:char,type,a:removed,a:special)
+  call setreg(a:reg,new,type)
+endfunction
 " }}}1
 
 " function! s:insert(...) " {{{1
@@ -482,12 +482,12 @@ endfunction " }}}1
 "   call s:dosurround(a,b,a:0 && a:1)
 " endfunction " }}}1
 
-" function! s:opfunc(type,...) " {{{1
-"   let char = s:inputreplacement()
+function! s:opfunc(type,...) " {{{1
+  let char = s:inputreplacement()
 "   if char == ""
 "     return s:beep()
 "   endif
-"   let reg = '"'
+  let reg = '"'
 "   let sel_save = &selection
 "   let &selection = "inclusive"
 "   let cb_save  = &clipboard
@@ -496,7 +496,7 @@ endfunction " }}}1
 "   let reg_type = getregtype(reg)
 "   let type = a:type
 "   if a:type == "char"
-"     silent exe 'norm! v`[o`]"'.reg.'y'
+    silent exe 'norm! v`[o`]"'.reg.'y'
 "     let type = 'v'
 "   elseif a:type == "line"
 "     silent exe 'norm! `[V`]"'.reg.'y'
@@ -527,11 +527,11 @@ endfunction " }}}1
 "     let keeper = substitute(keeper,'\_s\@<!\s*$','','')
 "   endif
 "   call setreg(reg,keeper,type)
-"   call s:wrapreg(reg,char,"",a:0 && a:1)
+  call s:wrapreg(reg,char,"",a:0 && a:1)
 "   if type ==# "v" && a:type !=# "v" && append != ""
 "     call setreg(reg,append,"ac")
 "   endif
-"   silent exe 'norm! gv'.(reg == '"' ? '' : '"' . reg).'p`['
+  silent exe 'norm! gv'.(reg == '"' ? '' : '"' . reg).'p`['
 "   if type ==# 'V' || (getreg(reg) =~ '\n' && type ==# 'v')
 "     call s:reindent()
 "   endif
@@ -543,7 +543,7 @@ endfunction " }}}1
 "   else
 "     silent! call repeat#set("\<Plug>SurroundRepeat".char.s:input)
 "   endif
-" endfunction
+endfunction
 
 " function! s:opfunc2(arg)
 "   call s:opfunc(a:arg,1)
@@ -572,7 +572,7 @@ nnoremap <silent> <Plug>Dsurround  :<C-U>call <SID>dosurround(<SID>inputtarget()
 " nnoremap <silent> <Plug>Yssurround :<C-U>call <SID>opfunc(v:count1)<CR>
 " nnoremap <silent> <Plug>YSsurround :<C-U>call <SID>opfunc2(v:count1)<CR>
 " <C-U> discards the numerical argument but there's not much we can do with it
-" nnoremap <silent> <Plug>Ysurround  :<C-U>set opfunc=<SID>opfunc<CR>g@
+nnoremap <silent> <Plug>Ysurround  :<C-U>set opfunc=<SID>opfunc<CR>g@
 " nnoremap <silent> <Plug>YSurround  :<C-U>set opfunc=<SID>opfunc2<CR>g@
 " vnoremap <silent> <Plug>VSurround  :<C-U>call <SID>opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
 " vnoremap <silent> <Plug>VgSurround :<C-U>call <SID>opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR>
@@ -583,7 +583,7 @@ if !exists("g:surround_no_mappings") || ! g:surround_no_mappings
   nmap ds  <Plug>Dsurround
   " nmap cs  <Plug>Csurround
   " nmap cS  <Plug>CSurround
-  " nmap ys  <Plug>Ysurround
+  nmap ys  <Plug>Ysurround
   " nmap yS  <Plug>YSurround
   " nmap yss <Plug>Yssurround
   " nmap ySs <Plug>YSsurround
