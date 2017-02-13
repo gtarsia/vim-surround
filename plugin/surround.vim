@@ -137,13 +137,13 @@ function! s:wrap(string,char,type,removed,special)
 "   else
 "     let initspaces = matchstr(getline('.'),'\%^\s*')
 "   endif
-"   let pairs = "b()B{}r[]a<>"
+  let pairs = "b()B{}r[]a<>"
 "   let extraspace = ""
 "   if newchar =~ '^ '
 "     let newchar = strpart(newchar,1)
 "     let extraspace = ' '
 "   endif
-"   let idx = stridx(pairs,newchar)
+  let idx = stridx(pairs,newchar)
 "   if newchar == ' '
 "     let before = ''
 "     let after  = ''
@@ -236,21 +236,23 @@ function! s:wrap(string,char,type,removed,special)
 "     let s:input = fnc."\<CR>"
 "     let before = '('.fnc.' '
 "     let after = ')'
-"   elseif idx >= 0
-"     let spc = (idx % 3) == 1 ? " " : ""
-"     let idx = idx / 3 * 3
-"     let before = strpart(pairs,idx+1,1) . spc
-"     let after  = spc . strpart(pairs,idx+2,1)
+  " elseif idx >= 0
+  if idx >= 0 " (tmp)
+    let spc = (idx % 3) == 1 ? " " : ""
+    let idx = idx / 3 * 3
+    let before = strpart(pairs,idx+1,1) . spc
+    let after  = spc . strpart(pairs,idx+2,1)
 "   elseif newchar == "\<C-[>" || newchar == "\<C-]>"
 "     let before = "{\n\t"
 "     let after  = "\n}"
 "   elseif newchar !~ '\a'
+  else " (tmp)
     let before = newchar
     let after  = newchar
 "   else
 "     let before = ''
 "     let after  = ''
-"   endif
+  endif
 "   let after  = substitute(after ,'\n','\n'.initspaces,'g')
 "   if type ==# 'V' || (a:special && type ==# "v")
 "     let before = substitute(before,' \+$','','')
