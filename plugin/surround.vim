@@ -144,9 +144,9 @@ function! s:wrap(string,char,type,removed,special)
     let extraspace = ' '
   endif
   let idx = stridx(pairs,newchar)
-"   if newchar == ' '
-"     let before = ''
-"     let after  = ''
+  if newchar == ' '
+    let before = ''
+    let after  = ''
 "   elseif exists("b:surround_".char2nr(newchar))
 "     let all    = s:process(b:surround_{char2nr(newchar)})
 "     let before = s:extractbefore(all)
@@ -236,8 +236,7 @@ function! s:wrap(string,char,type,removed,special)
 "     let s:input = fnc."\<CR>"
 "     let before = '('.fnc.' '
 "     let after = ')'
-  " elseif idx >= 0
-  if idx >= 0 " (tmp)
+  elseif idx >= 0
     let spc = (idx % 3) == 1 ? " " : ""
     let idx = idx / 3 * 3
     let before = strpart(pairs,idx+1,1) . spc
