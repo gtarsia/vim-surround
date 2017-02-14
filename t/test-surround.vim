@@ -116,4 +116,11 @@ describe 'ys'
     Expect getline(1) == '<world>'
   end
 
+  it 'surrounds with character and extra spaces'
+    put! = 'world'
+    Expect getline(1) == 'world'
+    execute "normal ysiw\<space>_"
+    Expect getline(1) == '_ world _'
+  end
+
 end

@@ -35,9 +35,9 @@ endfunction
 
 function! s:inputreplacement()
   let c = s:getchar()
-  " if c == " "
-  "   let c .= s:getchar()
-  " endif
+  if c == " "
+    let c .= s:getchar()
+  endif
   " if c =~ "\<Esc>" || c =~ "\<C-C>"
   "   return ""
   " else
@@ -138,11 +138,11 @@ function! s:wrap(string,char,type,removed,special)
 "     let initspaces = matchstr(getline('.'),'\%^\s*')
 "   endif
   let pairs = "b()B{}r[]a<>"
-"   let extraspace = ""
-"   if newchar =~ '^ '
-"     let newchar = strpart(newchar,1)
-"     let extraspace = ' '
-"   endif
+  let extraspace = ""
+  if newchar =~ '^ '
+    let newchar = strpart(newchar,1)
+    let extraspace = ' '
+  endif
   let idx = stridx(pairs,newchar)
 "   if newchar == ' '
 "     let before = ''
@@ -287,12 +287,12 @@ function! s:wrap(string,char,type,removed,special)
 "     let keeper = before.keeper.after
 "   elseif type =~ "^\<C-V>"
 "     " Really we should be iterating over the buffer
-    let repl = substitute(before,'[\\~]','\\&','g').'\1'.substitute(after,'[\\~]','\\&','g')
+"     let repl = substitute(before,'[\\~]','\\&','g').'\1'.substitute(after,'[\\~]','\\&','g')
 "     let repl = substitute(repl,'\n',' ','g')
-    let keeper = substitute(keeper."\n",'\(.\{-\}\)\(\n\)',repl.'\n','g')
+"     let keeper = substitute(keeper."\n",'\(.\{-\}\)\(\n\)',repl.'\n','g')
 "     let keeper = substitute(keeper,'\n\%$','','')
 "   else
-"     let keeper = before.extraspace.keeper.extraspace.after
+    let keeper = before.extraspace.keeper.extraspace.after
 "   endif
   return keeper
 endfunction
