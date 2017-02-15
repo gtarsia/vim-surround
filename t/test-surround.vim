@@ -130,4 +130,16 @@ describe 'ys'
     Expect getline(1) == '_ world _'
   end
 
+  it 'surrounds as paragraph'
+    put! = 'world'
+    Expect getline(1) == 'world'
+    execute "normal ysiwp"
+    Expect getline(1) == ''
+    Expect getline(2) == 'world'
+    Expect getline(3) == ''
+    Expect getline(4) == ''
+    normal G
+    Expect line(".") == 5
+  end
+
 end
