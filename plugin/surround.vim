@@ -161,9 +161,9 @@ function! s:wrap(string,char,type,removed,special)
   elseif newchar ==# 's'
     let before = ' '
     let after  = ''
-"   elseif newchar ==# ':'
-"     let before = ':'
-"     let after = ''
+  elseif newchar ==# ':'
+    let before = ':'
+    let after = ''
 "   elseif newchar =~# "[tT\<C-T><]"
 "     let dounmapp = 0
 "     let dounmapb = 0

@@ -149,4 +149,11 @@ describe 'ys'
     Expect getline(1) == ' world'
   end
 
+  it 'adds leading colon'
+    put! = 'world'
+    Expect getline(1) == 'world'
+    execute "normal ysiw:"
+    Expect getline(1) == ':world'
+  end
+
 end
