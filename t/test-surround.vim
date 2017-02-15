@@ -163,4 +163,15 @@ describe 'ys'
     Expect getline(1) == 'world'
   end
 
+  it 'surrounds cursor with curly braces in insert mode'
+    put! = 'world'
+    Expect getline(1) == 'world'
+    normal fl
+    Expect CursorChar() == 'l'
+    execute "normal i\<C-G>s\<C-]>hello\<esc>"
+    Expect getline(1) == "wor{"
+    Expect getline(2) == "\thello"
+    Expect getline(3) == "}ld"
+  end
+
 end

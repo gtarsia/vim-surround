@@ -241,9 +241,9 @@ function! s:wrap(string,char,type,removed,special)
     let idx = idx / 3 * 3
     let before = strpart(pairs,idx+1,1) . spc
     let after  = spc . strpart(pairs,idx+2,1)
-"   elseif newchar == "\<C-[>" || newchar == "\<C-]>"
-"     let before = "{\n\t"
-"     let after  = "\n}"
+  elseif newchar == "\<C-[>" || newchar == "\<C-]>"
+    let before = "{\n\t"
+    let after  = "\n}"
   elseif newchar !~ '\a'
     let before = newchar
     let after  = newchar
@@ -303,10 +303,10 @@ function! s:wrapreg(reg,char,removed,special)
 endfunction
 " }}}1
 
-" function! s:insert(...) " {{{1
-"   " Optional argument causes the result to appear on 3 lines, not 1
-"   let linemode = a:0 ? a:1 : 0
-"   let char = s:inputreplacement()
+function! s:insert(...) " {{{1
+  " Optional argument causes the result to appear on 3 lines, not 1
+  let linemode = a:0 ? a:1 : 0
+  let char = s:inputreplacement()
 "   while char == "\<CR>" || char == "\<C-S>"
 "     " TODO: use total count for additional blank lines
 "     let linemode += 1
@@ -318,8 +318,8 @@ endfunction
 "   let cb_save = &clipboard
 "   set clipboard-=unnamed clipboard-=unnamedplus
 "   let reg_save = @@
-"   call setreg('"',"\r",'v')
-"   call s:wrapreg('"',char,"",linemode)
+  call setreg('"',"\r",'v')
+  call s:wrapreg('"',char,"",linemode)
 "   " If line mode is used and the surrounding consists solely of a suffix,
 "   " remove the initial newline.  This fits a use case of mine but is a
 "   " little inconsistent.  Is there anyone that would prefer the simpler
@@ -334,17 +334,17 @@ endfunction
 "   if col('.') >= col('$')
 "     norm! ""p
 "   else
-"     norm! ""P
+    norm! ""P
 "   endif
 "   if linemode
 "     call s:reindent()
 "   endif
-"   norm! `]
-"   call search('\r','bW')
+  norm! `]
+  call search('\r','bW')
 "   let @@ = reg_save
 "   let &clipboard = cb_save
-"   return "\<Del>"
-" endfunction " }}}1
+  return "\<Del>"
+endfunction " }}}1
 
 " function! s:reindent() " {{{1
 "   if exists("b:surround_indent") ? b:surround_indent : (!exists("g:surround_indent") || g:surround_indent)
@@ -576,7 +576,7 @@ nnoremap <silent> <Plug>Ysurround  :<C-U>set opfunc=<SID>opfunc<CR>g@
 " nnoremap <silent> <Plug>YSurround  :<C-U>set opfunc=<SID>opfunc2<CR>g@
 " vnoremap <silent> <Plug>VSurround  :<C-U>call <SID>opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
 " vnoremap <silent> <Plug>VgSurround :<C-U>call <SID>opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR>
-" inoremap <silent> <Plug>Isurround  <C-R>=<SID>insert()<CR>
+inoremap <silent> <Plug>Isurround  <C-R>=<SID>insert()<CR>
 " inoremap <silent> <Plug>ISurround  <C-R>=<SID>insert(1)<CR>
 
 if !exists("g:surround_no_mappings") || ! g:surround_no_mappings
@@ -594,7 +594,7 @@ if !exists("g:surround_no_mappings") || ! g:surround_no_mappings
   "   if !hasmapto("<Plug>Isurround","i") && "" == mapcheck("<C-S>","i")
   "     imap    <C-S> <Plug>Isurround
   "   endif
-  "   imap      <C-G>s <Plug>Isurround
+    imap      <C-G>s <Plug>Isurround
   "   imap      <C-G>S <Plug>ISurround
   " endif
 endif
