@@ -244,13 +244,12 @@ function! s:wrap(string,char,type,removed,special)
 "   elseif newchar == "\<C-[>" || newchar == "\<C-]>"
 "     let before = "{\n\t"
 "     let after  = "\n}"
-"   elseif newchar !~ '\a'
-  else " (tmp)
+  elseif newchar !~ '\a'
     let before = newchar
     let after  = newchar
-"   else
-"     let before = ''
-"     let after  = ''
+  else
+    let before = ''
+    let after  = ''
   endif
 "   let after  = substitute(after ,'\n','\n'.initspaces,'g')
 "   if type ==# 'V' || (a:special && type ==# "v")

@@ -156,4 +156,11 @@ describe 'ys'
     Expect getline(1) == ':world'
   end
 
+  it "ignores alphabetic chars that don't have special semantics"
+    put! = 'world'
+    Expect getline(1) == 'world'
+    execute "normal ysiwk"
+    Expect getline(1) == 'world'
+  end
+
 end
