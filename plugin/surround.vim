@@ -158,9 +158,9 @@ function! s:wrap(string,char,type,removed,special)
   elseif newchar ==# "p"
     let before = "\n"
     let after  = "\n\n"
-"   elseif newchar ==# 's'
-"     let before = ' '
-"     let after  = ''
+  elseif newchar ==# 's'
+    let before = ' '
+    let after  = ''
 "   elseif newchar ==# ':'
 "     let before = ':'
 "     let after = ''

@@ -142,4 +142,11 @@ describe 'ys'
     Expect line(".") == 5
   end
 
+  it 'adds leading space'
+    put! = 'world'
+    Expect getline(1) == 'world'
+    execute "normal ysiws"
+    Expect getline(1) == ' world'
+  end
+
 end
