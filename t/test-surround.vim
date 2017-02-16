@@ -212,4 +212,11 @@ describe 'ys'
     Expect getline(1) == '<?php world ?>'
   end
 
+  it 'surrounds with lisp function call'
+    put! = '2 3 5'
+    Expect getline(1) == '2 3 5'
+    execute "normal ys$\<C-F>average\<cr>"
+    Expect getline(1) == '(average 2 3 5)'
+  end
+
 end

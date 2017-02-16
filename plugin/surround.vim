@@ -231,11 +231,11 @@ function! s:wrap(string,char,type,removed,special)
 "         let after = ' ' . after
 "       endif
 "     endif
-"   elseif newchar ==# "\<C-F>"
-"     let fnc = input('function: ')
+  elseif newchar ==# "\<C-F>"
+    let fnc = input('function: ')
 "     let s:input = fnc."\<CR>"
-"     let before = '('.fnc.' '
-"     let after = ')'
+    let before = '('.fnc.' '
+    let after = ')'
   elseif idx >= 0
     let spc = (idx % 3) == 1 ? " " : ""
     let idx = idx / 3 * 3
