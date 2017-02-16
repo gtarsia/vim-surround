@@ -151,10 +151,10 @@ function! s:wrap(string,char,type,removed,special)
     let all    = s:process(b:surround_{char2nr(newchar)})
     let before = s:extractbefore(all)
     let after  =  s:extractafter(all)
-"   elseif exists("g:surround_".char2nr(newchar))
-"     let all    = s:process(g:surround_{char2nr(newchar)})
-"     let before = s:extractbefore(all)
-"     let after  =  s:extractafter(all)
+  elseif exists("g:surround_".char2nr(newchar))
+    let all    = s:process(g:surround_{char2nr(newchar)})
+    let before = s:extractbefore(all)
+    let after  =  s:extractafter(all)
   elseif newchar ==# "p"
     let before = "\n"
     let after  = "\n\n"
