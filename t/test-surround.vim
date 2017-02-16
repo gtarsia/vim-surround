@@ -174,4 +174,22 @@ describe 'ys'
     Expect getline(3) == "}ld"
   end
 
+  it 'surrounds with custom template'
+    put! = 'world'
+    Expect getline(1) == 'world'
+    " custom template for '-' (ASCII 45)
+    let b:surround_45 = "<?php \r ?>"
+    execute 'normal ysiw-'
+    Expect getline(1) == '<?php world ?>'
+  end
+
+  it 'overrides default surround with custom template'
+    put! = 'world'
+    Expect getline(1) == 'world'
+    " custom template for ')' (ASCII 41)
+    let b:surround_41 = "<?php \r ?>"
+    execute 'normal ysiw)'
+    Expect getline(1) == '<?php world ?>'
+  end
+
 end

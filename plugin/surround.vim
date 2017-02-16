@@ -59,21 +59,21 @@ endfunction
 
 " Wrapping functions {{{1
 
-" function! s:extractbefore(str)
+function! s:extractbefore(str)
 "   if a:str =~ '\r'
-"     return matchstr(a:str,'.*\ze\r')
+    return matchstr(a:str,'.*\ze\r')
 "   else
 "     return matchstr(a:str,'.*\ze\n')
 "   endif
-" endfunction
+endfunction
 
-" function! s:extractafter(str)
+function! s:extractafter(str)
 "   if a:str =~ '\r'
-"     return matchstr(a:str,'\r\zs.*')
+    return matchstr(a:str,'\r\zs.*')
 "   else
 "     return matchstr(a:str,'\n\zs.*')
 "   endif
-" endfunction
+endfunction
 
 " function! s:fixindent(str,spc)
 "   let str = substitute(a:str,'\t',repeat(' ',&sw),'g')
@@ -85,7 +85,7 @@ endfunction
 "   return str
 " endfunction
 
-" function! s:process(string)
+function! s:process(string)
 "   let i = 0
 "   for i in range(7)
 "     let repl_{i} = ''
@@ -95,10 +95,10 @@ endfunction
 "       let repl_{i} = input(match(m,'\w\+$') >= 0 ? m.': ' : m)
 "     endif
 "   endfor
-"   let s = ""
-"   let i = 0
-"   while i < strlen(a:string)
-"     let char = strpart(a:string,i,1)
+  let s = ""
+  let i = 0
+  while i < strlen(a:string)
+    let char = strpart(a:string,i,1)
 "     if char2nr(char) < 8
 "       let next = stridx(a:string,char,i+1)
 "       if next == -1
@@ -117,12 +117,12 @@ endfunction
 "         let i = next
 "       endif
 "     else
-"       let s .= char
+      let s .= char
 "     endif
-"     let i += 1
-"   endwhile
-"   return s
-" endfunction
+    let i += 1
+  endwhile
+  return s
+endfunction
 
 function! s:wrap(string,char,type,removed,special)
   let keeper = a:string
@@ -147,10 +147,10 @@ function! s:wrap(string,char,type,removed,special)
   if newchar == ' '
     let before = ''
     let after  = ''
-"   elseif exists("b:surround_".char2nr(newchar))
-"     let all    = s:process(b:surround_{char2nr(newchar)})
-"     let before = s:extractbefore(all)
-"     let after  =  s:extractafter(all)
+  elseif exists("b:surround_".char2nr(newchar))
+    let all    = s:process(b:surround_{char2nr(newchar)})
+    let before = s:extractbefore(all)
+    let after  =  s:extractafter(all)
 "   elseif exists("g:surround_".char2nr(newchar))
 "     let all    = s:process(g:surround_{char2nr(newchar)})
 "     let before = s:extractbefore(all)
