@@ -130,8 +130,8 @@ function! s:wrap(string,char,type,removed,special)
 "   let s:input = ""
 "   let type = a:type
 "   let linemode = type ==# 'V' ? 1 : 0
-"   let before = ""
-"   let after  = ""
+  let before = ""
+  let after  = ""
 "   if type ==# "V"
 "     let initspaces = matchstr(keeper,'\%^\s*')
 "   else
@@ -220,17 +220,17 @@ function! s:wrap(string,char,type,removed,special)
 "       let before = '\begin'.env
 "       let after  = '\end'.matchstr(env,'[^}]*').'}'
 "     endif
-"   elseif newchar ==# 'f' || newchar ==# 'F'
-"     let fnc = input('function: ')
-"     if fnc != ""
+  elseif newchar ==# 'f' || newchar ==# 'F'
+    let fnc = input('function: ')
+    if fnc != ""
 "       let s:input = fnc."\<CR>"
-"       let before = substitute(fnc,'($','','').'('
-"       let after  = ')'
-"       if newchar ==# 'F'
-"         let before .= ' '
-"         let after = ' ' . after
-"       endif
-"     endif
+      let before = substitute(fnc,'($','','').'('
+      let after  = ')'
+      if newchar ==# 'F'
+        let before .= ' '
+        let after = ' ' . after
+      endif
+    endif
   elseif newchar ==# "\<C-F>"
     let fnc = input('function: ')
 "     let s:input = fnc."\<CR>"

@@ -142,6 +142,34 @@ describe 'ys'
     Expect line(".") == 5
   end
 
+  it 'surrounds with function call'
+    put! = '2, 3, 5'
+    Expect getline(1) == '2, 3, 5'
+    execute "normal ys$faverage\<cr>"
+    Expect getline(1) == 'average(2, 3, 5)'
+  end
+
+  it 'surrounds with function call and extra spaces'
+    put! = '2, 3, 5'
+    Expect getline(1) == '2, 3, 5'
+    execute "normal ys$Faverage\<cr>"
+    Expect getline(1) == 'average( 2, 3, 5 )'
+  end
+
+  it 'surrounds with function call, removing trailing parenthesis'
+    put! = '2, 3, 5'
+    Expect getline(1) == '2, 3, 5'
+    execute "normal ys$faverage(\<cr>"
+    Expect getline(1) == 'average(2, 3, 5)'
+  end
+
+  it 'does not surround with empty function call'
+    put! = '2, 3, 5'
+    Expect getline(1) == '2, 3, 5'
+    execute "normal ys$F\<cr>"
+    Expect getline(1) == '2, 3, 5'
+  end
+
   it 'adds leading space'
     put! = 'world'
     Expect getline(1) == 'world'
