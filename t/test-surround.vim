@@ -170,6 +170,27 @@ describe 'ys'
     Expect getline(1) == '2, 3, 5'
   end
 
+  it "surrounds latex ('l' mapping)"
+    put! = 'world'
+    Expect getline(1) == 'world'
+    execute "normal ysiwlcenter\<cr>"
+    Expect getline(1) == '\begin{center}world\end{center}'
+  end
+
+  it 'surrounds latex (\ mapping)'
+    put! = 'world'
+    Expect getline(1) == 'world'
+    execute 'normal ysiw\' . "center\<cr>"
+    Expect getline(1) == '\begin{center}world\end{center}'
+  end
+
+  it 'does not surround empty latex'
+    put! = 'world'
+    Expect getline(1) == 'world'
+    execute "normal ysiwl\<cr>"
+    Expect getline(1) == 'world'
+  end
+
   it 'adds leading space'
     put! = 'world'
     Expect getline(1) == 'world'

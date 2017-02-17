@@ -209,17 +209,17 @@ function! s:wrap(string,char,type,removed,special)
 "         endif
 "       endif
 "     endif
-"   elseif newchar ==# 'l' || newchar == '\'
-"     " LaTeX
-"     let env = input('\begin{')
-"     if env != ""
+  elseif newchar ==# 'l' || newchar == '\'
+    " LaTeX
+    let env = input('\begin{')
+    if env != ""
 "       let s:input = env."\<CR>"
-"       let env = '{' . env
-"       let env .= s:closematch(env)
+      let env = '{' . env
+      let env .= s:closematch(env)
 "       echo '\begin'.env
-"       let before = '\begin'.env
-"       let after  = '\end'.matchstr(env,'[^}]*').'}'
-"     endif
+      let before = '\begin'.env
+      let after  = '\end'.matchstr(env,'[^}]*').'}'
+    endif
   elseif newchar ==# 'f' || newchar ==# 'F'
     let fnc = input('function: ')
     if fnc != ""
@@ -549,7 +549,7 @@ endfunction
 "   call s:opfunc(a:arg,1)
 " endfunction " }}}1
 
-" function! s:closematch(str) " {{{1
+function! s:closematch(str) " {{{1
 "   " Close an open (, {, [, or < on the command line.
 "   let tail = matchstr(a:str,'.[^\[\](){}<>]*$')
 "   if tail =~ '^\[.\+'
@@ -557,13 +557,13 @@ endfunction
 "   elseif tail =~ '^(.\+'
 "     return ")"
 "   elseif tail =~ '^{.\+'
-"     return "}"
+    return "}"
 "   elseif tail =~ '^<.+'
 "     return ">"
 "   else
 "     return ""
 "   endif
-" endfunction " }}}1
+endfunction " }}}1
 
 " nnoremap <silent> <Plug>SurroundRepeat .
 nnoremap <silent> <Plug>Dsurround  :<C-U>call <SID>dosurround(<SID>inputtarget())<CR>
