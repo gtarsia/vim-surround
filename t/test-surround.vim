@@ -165,6 +165,15 @@ describe 'ys'
     Expect getline(3) == "</div>"
   end
 
+  it 'surrounds with tag in separate lines, indented'
+    put! = '		hello'
+    Expect getline(1) == "\t\thello"
+    execute "normal ysiw\<C-T>div\<cr>"
+    Expect getline(1) == "\t\t<div>"
+    Expect getline(2) == "\t\t\thello"
+    Expect getline(3) == "\t\t</div>"
+  end
+
   it 'surrounds with tag that has attributes'
     put! = 'hello'
     Expect getline(1) == 'hello'

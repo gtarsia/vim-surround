@@ -135,7 +135,7 @@ function! s:wrap(string,char,type,removed,special)
 "   if type ==# "V"
 "     let initspaces = matchstr(keeper,'\%^\s*')
 "   else
-"     let initspaces = matchstr(getline('.'),'\%^\s*')
+    let initspaces = matchstr(getline('.'),'\%^\s*')
 "   endif
   let pairs = "b()B{}r[]a<>"
   let extraspace = ""
@@ -251,7 +251,7 @@ function! s:wrap(string,char,type,removed,special)
     let before = ''
     let after  = ''
   endif
-"   let after  = substitute(after ,'\n','\n'.initspaces,'g')
+  let after  = substitute(after ,'\n','\n'.initspaces,'g')
 "   if type ==# 'V' || (a:special && type ==# "v")
 "     let before = substitute(before,' \+$','','')
 "     let after  = substitute(after ,'^ \+','','')
@@ -275,7 +275,7 @@ function! s:wrap(string,char,type,removed,special)
 "   endif
 "   if before =~ '\n\s*\%$'
 "     if type ==# 'v'
-"       let keeper = initspaces.keeper
+      let keeper = initspaces.keeper
 "     endif
 "     let padding = matchstr(before,'\n\zs\s\+\%$')
 "     let before  = substitute(before,'\n\s\+\%$','\n','')
