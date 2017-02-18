@@ -149,6 +149,13 @@ describe 'ys'
     Expect getline(1) == '<div>hello</div>'
   end
 
+  it 'surrounds with tag that has attributes'
+    put! = 'hello'
+    Expect getline(1) == 'hello'
+    execute "normal ysiwtdiv id=\"content\" class=\"row\"\<cr>"
+    Expect getline(1) == "<div id=\"content\" class=\"row\">hello</div>"
+  end
+
   it 'surrounds with function call'
     put! = '2, 3, 5'
     Expect getline(1) == '2, 3, 5'

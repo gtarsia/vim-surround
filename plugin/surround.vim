@@ -199,8 +199,7 @@ function! s:wrap(string,char,type,removed,special)
 "         let after = ''
 "       else
         let before = '<'.tag.attributes.'>'
-"         let after  = '</'.substitute(tag,' .*','','').'>'
-        let after  = '</'.tag.'>' " (tmp)
+        let after  = '</'.substitute(tag,' .*','','').'>'
 "       endif
 "       if newchar == "\<C-T>"
 "         if type ==# "v" || type ==# "V"
