@@ -184,7 +184,7 @@ function! s:wrap(string,char,type,removed,special)
 "       silent! cunmap >
 "     endif
 "     let s:input = tag
-"     if tag != ""
+    if tag != ""
 "       let keepAttributes = ( match(tag, ">$") == -1 )
 "       let tag = substitute(tag,'>*$','','')
       let attributes = ""
@@ -208,7 +208,7 @@ function! s:wrap(string,char,type,removed,special)
           let after  = "\n". after
 "         endif
       endif
-"     endif
+    endif
   elseif newchar ==# 'l' || newchar == '\'
     " LaTeX
     let env = input('\begin{')

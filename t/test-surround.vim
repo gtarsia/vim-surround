@@ -179,6 +179,13 @@ describe 'ys'
     Expect getline(1) == "<input />hello"
   end
 
+  it 'does not surround with empty tag'
+    put! = 'hello'
+    Expect getline(1) == 'hello'
+    execute "normal ysiwt\<cr>"
+    Expect getline(1) == 'hello'
+  end
+
   it 'surrounds with function call'
     put! = '2, 3, 5'
     Expect getline(1) == '2, 3, 5'
