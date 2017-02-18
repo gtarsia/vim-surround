@@ -142,10 +142,17 @@ describe 'ys'
     Expect line(".") == 5
   end
 
-  it 'surrounds with tag'
+  it "surrounds with tag ('t' mapping)"
     put! = 'hello'
     Expect getline(1) == 'hello'
     execute "normal ysiwtdiv\<cr>"
+    Expect getline(1) == '<div>hello</div>'
+  end
+
+  it "surrounds with tag ('T' mapping)"
+    put! = 'hello'
+    Expect getline(1) == 'hello'
+    execute "normal ysiwTdiv\<cr>"
     Expect getline(1) == '<div>hello</div>'
   end
 
