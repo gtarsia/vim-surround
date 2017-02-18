@@ -156,7 +156,7 @@ describe 'ys'
     Expect getline(1) == '<div>hello</div>'
   end
 
-  it "surrounds with tag in separate lines"
+  it 'surrounds with tag in separate lines'
     put! = 'hello'
     Expect getline(1) == 'hello'
     execute "normal ysiw\<C-T>div\<cr>"
@@ -170,6 +170,13 @@ describe 'ys'
     Expect getline(1) == 'hello'
     execute "normal ysiwtdiv id=\"content\" class=\"row\"\<cr>"
     Expect getline(1) == "<div id=\"content\" class=\"row\">hello</div>"
+  end
+
+  it 'prepends with tag'
+    put! = 'hello'
+    Expect getline(1) == 'hello'
+    execute "normal ysiwtinput/\<cr>"
+    Expect getline(1) == "<input />hello"
   end
 
   it 'surrounds with function call'

@@ -192,14 +192,14 @@ function! s:wrap(string,char,type,removed,special)
 "         let attributes = matchstr(a:removed, '<[^ \t\n]\+\zs\_.\{-\}\ze>')
 "       endif
 "       let s:input = tag . '>'
-"       if tag =~ '/$'
-"         let tag = substitute(tag, '/$', '', '')
-"         let before = '<'.tag.attributes.' />'
-"         let after = ''
-"       else
+      if tag =~ '/$'
+        let tag = substitute(tag, '/$', '', '')
+        let before = '<'.tag.attributes.' />'
+        let after = ''
+      else
         let before = '<'.tag.attributes.'>'
         let after  = '</'.substitute(tag,' .*','','').'>'
-"       endif
+      endif
       if newchar == "\<C-T>"
 "         if type ==# "v" || type ==# "V"
           let before .= "\n\t"
