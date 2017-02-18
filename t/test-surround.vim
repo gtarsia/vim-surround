@@ -102,13 +102,6 @@ describe 'ys'
     Expect getline(1) == '<world>'
   end
 
-  it 'surrounds with angle brackets and extra spaces'
-    put! = 'world'
-    Expect getline(1) == 'world'
-    normal ysiw<
-    Expect getline(1) == '< world >'
-  end
-
   it 'surrounds with angle brackets (aliased)'
     put! = 'world'
     Expect getline(1) == 'world'
