@@ -194,6 +194,19 @@ describe 'ys'
     Expect maparg('>', 'c') == ''
   end
 
+  it "surrounds with tag, erasing existing '>' cmd-line mapping (bug)"
+    put! = 'hello'
+    Expect getline(1) == 'hello'
+    cnoremap > x
+    execute "normal ysiwtdiv>"
+    Expect getline(1) == '<div>hello</div>'
+    Expect maparg('>', 'c') == ''
+    " line 170 always returns true -> if !maparg(">","c")
+    " should be instead -> if maparg(">","c") !=# ""
+    " making the spec in this case be:
+    " 'not finishing input when '>' is pressed and preserving existing mapping'
+  end
+
   it 'surrounds with function call'
     put! = '2, 3, 5'
     Expect getline(1) == '2, 3, 5'
