@@ -165,6 +165,7 @@ function! s:wrap(string,char,type,removed,special)
     let before = ':'
     let after = ''
 "   elseif newchar =~# "[tT\<C-T><]"
+  elseif newchar =~# "[t]" " (tmp)
 "     let dounmapp = 0
 "     let dounmapb = 0
 "     if !maparg(">","c")
@@ -172,14 +173,14 @@ function! s:wrap(string,char,type,removed,special)
 "       " Hide from AsNeeded
 "       exe "cn"."oremap > ><CR>"
 "     endif
-"     let default = ""
+    let default = ""
 "     if newchar ==# "T"
 "       if !exists("s:lastdel")
 "         let s:lastdel = ""
 "       endif
 "       let default = matchstr(s:lastdel,'<\zs.\{-\}\ze>')
 "     endif
-"     let tag = input("<",default)
+    let tag = input("<",default)
 "     if dounmapb
 "       silent! cunmap >
 "     endif
@@ -187,7 +188,7 @@ function! s:wrap(string,char,type,removed,special)
 "     if tag != ""
 "       let keepAttributes = ( match(tag, ">$") == -1 )
 "       let tag = substitute(tag,'>*$','','')
-"       let attributes = ""
+      let attributes = ""
 "       if keepAttributes
 "         let attributes = matchstr(a:removed, '<[^ \t\n]\+\zs\_.\{-\}\ze>')
 "       endif
@@ -197,8 +198,9 @@ function! s:wrap(string,char,type,removed,special)
 "         let before = '<'.tag.attributes.' />'
 "         let after = ''
 "       else
-"         let before = '<'.tag.attributes.'>'
+        let before = '<'.tag.attributes.'>'
 "         let after  = '</'.substitute(tag,' .*','','').'>'
+        let after  = '</'.tag.'>' " (tmp)
 "       endif
 "       if newchar == "\<C-T>"
 "         if type ==# "v" || type ==# "V"
