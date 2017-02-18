@@ -186,6 +186,14 @@ describe 'ys'
     Expect getline(1) == 'hello'
   end
 
+  it "surrounds with tag, finishing input when '>' is pressed"
+    put! = 'hello'
+    Expect getline(1) == 'hello'
+    execute "normal ysiwtdiv>"
+    Expect getline(1) == '<div>hello</div>'
+    Expect maparg('>', 'c') == ''
+  end
+
   it 'surrounds with function call'
     put! = '2, 3, 5'
     Expect getline(1) == '2, 3, 5'

@@ -169,8 +169,8 @@ function! s:wrap(string,char,type,removed,special)
 "     let dounmapb = 0
 "     if !maparg(">","c")
 "       let dounmapb = 1
-"       " Hide from AsNeeded
-"       exe "cn"."oremap > ><CR>"
+      " Hide from AsNeeded
+      exe "cn"."oremap > ><CR>"
 "     endif
     let default = ""
 "     if newchar ==# "T"
@@ -181,12 +181,12 @@ function! s:wrap(string,char,type,removed,special)
 "     endif
     let tag = input("<",default)
 "     if dounmapb
-"       silent! cunmap >
+      silent! cunmap >
 "     endif
 "     let s:input = tag
     if tag != ""
 "       let keepAttributes = ( match(tag, ">$") == -1 )
-"       let tag = substitute(tag,'>*$','','')
+      let tag = substitute(tag,'>*$','','')
       let attributes = ""
 "       if keepAttributes
 "         let attributes = matchstr(a:removed, '<[^ \t\n]\+\zs\_.\{-\}\ze>')
