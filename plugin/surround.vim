@@ -495,7 +495,7 @@ function! s:opfunc(type,...) " {{{1
 "   let reg_save = getreg(reg)
 "   let reg_type = getregtype(reg)
 "   let type = a:type
-"   if a:type == "char"
+  if a:type == "char"
     silent exe 'norm! v`[o`]"'.reg.'y'
 "     let type = 'v'
 "   elseif a:type == "line"
@@ -510,8 +510,9 @@ function! s:opfunc(type,...) " {{{1
 "     silent exe 'norm! gv"'.reg.'y'
 "     let &virtualedit = ve
 "   elseif a:type =~ '^\d\+$'
+  elseif a:type ==# '1' " (tmp)
 "     let type = 'v'
-"     silent exe 'norm! ^v'.a:type.'$h"'.reg.'y'
+    silent exe 'norm! ^v'.a:type.'$h"'.reg.'y'
 "     if mode() ==# 'v'
 "       norm! v
 "       return s:beep()
@@ -520,7 +521,7 @@ function! s:opfunc(type,...) " {{{1
 "     let &selection = sel_save
 "     let &clipboard = cb_save
 "     return s:beep()
-"   endif
+  endif
 "   let keeper = getreg(reg)
 "   if type ==# "v" && a:type !=# "v"
 "     let append = matchstr(keeper,'\_s\@<!\s*$')
@@ -570,6 +571,8 @@ nnoremap <silent> <Plug>Dsurround  :<C-U>call <SID>dosurround(<SID>inputtarget()
 " nnoremap <silent> <Plug>Csurround  :<C-U>call <SID>changesurround()<CR>
 " nnoremap <silent> <Plug>CSurround  :<C-U>call <SID>changesurround(1)<CR>
 " nnoremap <silent> <Plug>Yssurround :<C-U>call <SID>opfunc(v:count1)<CR>
+" (tmp)
+nnoremap <silent> <Plug>Yssurround :<C-U>call <SID>opfunc('1')<CR>
 " nnoremap <silent> <Plug>YSsurround :<C-U>call <SID>opfunc2(v:count1)<CR>
 " <C-U> discards the numerical argument but there's not much we can do with it
 nnoremap <silent> <Plug>Ysurround  :<C-U>set opfunc=<SID>opfunc<CR>g@
@@ -585,7 +588,7 @@ if !exists("g:surround_no_mappings") || ! g:surround_no_mappings
   " nmap cS  <Plug>CSurround
   nmap ys  <Plug>Ysurround
   " nmap yS  <Plug>YSurround
-  " nmap yss <Plug>Yssurround
+  nmap yss <Plug>Yssurround
   " nmap ySs <Plug>YSsurround
   " nmap ySS <Plug>YSsurround
   " xmap S   <Plug>VSurround

@@ -342,4 +342,13 @@ describe 'ys'
     Expect getline(1) == '(average 2 3 5)'
   end
 
+  it 'operates on the current line'
+    put! = 'hello, world!'
+    Expect getline(1) == 'hello, world!'
+    normal fw
+    Expect CursorChar() == 'w'
+    execute 'normal yss)'
+    Expect getline(1) == '(hello, world!)'
+  end
+
 end
