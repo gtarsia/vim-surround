@@ -509,8 +509,7 @@ function! s:opfunc(type,...) " {{{1
 "     endif
 "     silent exe 'norm! gv"'.reg.'y'
 "     let &virtualedit = ve
-"   elseif a:type =~ '^\d\+$'
-  elseif a:type ==# '1' " (tmp)
+  elseif a:type =~ '^\d\+$'
 "     let type = 'v'
     silent exe 'norm! ^v'.a:type.'$h"'.reg.'y'
 "     if mode() ==# 'v'
@@ -570,9 +569,7 @@ endfunction " }}}1
 nnoremap <silent> <Plug>Dsurround  :<C-U>call <SID>dosurround(<SID>inputtarget())<CR>
 " nnoremap <silent> <Plug>Csurround  :<C-U>call <SID>changesurround()<CR>
 " nnoremap <silent> <Plug>CSurround  :<C-U>call <SID>changesurround(1)<CR>
-" nnoremap <silent> <Plug>Yssurround :<C-U>call <SID>opfunc(v:count1)<CR>
-" (tmp)
-nnoremap <silent> <Plug>Yssurround :<C-U>call <SID>opfunc('1')<CR>
+nnoremap <silent> <Plug>Yssurround :<C-U>call <SID>opfunc(v:count1)<CR>
 " nnoremap <silent> <Plug>YSsurround :<C-U>call <SID>opfunc2(v:count1)<CR>
 " <C-U> discards the numerical argument but there's not much we can do with it
 nnoremap <silent> <Plug>Ysurround  :<C-U>set opfunc=<SID>opfunc<CR>g@

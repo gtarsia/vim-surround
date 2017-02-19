@@ -342,7 +342,7 @@ describe 'ys'
     Expect getline(1) == '(average 2 3 5)'
   end
 
-  it 'operates on the current line'
+  it "operates on the current line ('yss')"
     put! = 'hello, world!'
     Expect getline(1) == 'hello, world!'
     normal fw
@@ -351,7 +351,7 @@ describe 'ys'
     Expect getline(1) == '(hello, world!)'
   end
 
-  it 'operates on the current line, ignoring leading whitespaces'
+  it "operates on the current line, ignoring leading whitespaces ('yss')"
     put! = '  hello, world!'
     Expect getline(1) == '  hello, world!'
     normal fw
@@ -359,6 +359,18 @@ describe 'ys'
     execute 'normal yss)'
     Expect getline(1) == '  (hello, world!)'
     Expect CursorChar() == '('
+  end
+
+  it "operates on count lines ('yss')"
+    put! = 'apples bananas'
+    put = 'watermelons strawberries'
+    put = 'oranges grapes'
+    normal gg
+    Expect getline('.') == 'apples bananas'
+    execute 'normal 3yss>'
+    Expect getline(1) == '<apples bananas'
+    Expect getline(2) == 'watermelons strawberries'
+    Expect getline(3) == 'oranges grapes>'
   end
 
 end
