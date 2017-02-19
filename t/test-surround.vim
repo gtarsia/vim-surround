@@ -368,9 +368,31 @@ describe 'ys'
     normal gg
     Expect getline('.') == 'apples bananas'
     execute 'normal 3yss>'
+    " when manually putting angle brackets
+    " and using '=' operator
+    " indentation won't be affected (at least in my setup)
+    " that's why '>' is being used here
     Expect getline(1) == '<apples bananas'
     Expect getline(2) == 'watermelons strawberries'
     Expect getline(3) == 'oranges grapes>'
   end
+
+  " Still don't know how to make this pass
+  " maybe it depends on some additional setting that is in my vimrc
+  " it "operates on count lines, indented ('yss')"
+  "   put! = 'apples bananas'
+  "   put = 'watermelons strawberries'
+  "   put = 'oranges grapes'
+  "   normal gg
+  "   Expect getline('.') == 'apples bananas'
+  "   execute 'normal 3yss)'
+  "   " when manually putting parenthesis
+  "   " and using '=' operator
+  "   " vim will indent (at least in my setup)
+  "   " that's why ')' is being used here
+  "   Expect getline(1) == '(apples bananas'
+  "   Expect getline(2) == ' watermelons strawberries'
+  "   Expect getline(3) == ' oranges grapes)'
+  " end
 
 end
