@@ -273,14 +273,14 @@ function! s:wrap(string,char,type,removed,special)
 "   if type ==# 'V'
 "     let before = initspaces.before
 "   endif
-"   if before =~ '\n\s*\%$'
+  if before =~ '\n\s*\%$'
 "     if type ==# 'v'
       let keeper = initspaces.keeper
 "     endif
 "     let padding = matchstr(before,'\n\zs\s\+\%$')
 "     let before  = substitute(before,'\n\s\+\%$','\n','')
 "     let keeper = s:fixindent(keeper,padding)
-"   endif
+  endif
 "   if type ==# 'V'
 "     let keeper = before.keeper.after
 "   elseif type =~ "^\<C-V>"

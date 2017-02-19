@@ -351,4 +351,14 @@ describe 'ys'
     Expect getline(1) == '(hello, world!)'
   end
 
+  it 'operates on the current line, ignoring leading whitespaces'
+    put! = '  hello, world!'
+    Expect getline(1) == '  hello, world!'
+    normal fw
+    Expect CursorChar() == 'w'
+    execute 'normal yss)'
+    Expect getline(1) == '  (hello, world!)'
+    Expect CursorChar() == '('
+  end
+
 end
