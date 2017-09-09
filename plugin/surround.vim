@@ -370,13 +370,13 @@ function! s:dosurround(...) " {{{1
   if char == 'r'
     let char = ']'
   endif
-  " let newchar = ""
-  " if a:0 > 1
-    " let newchar = a:2
+  let newchar = ""
+  if a:0 > 1
+    let newchar = a:2
     " if newchar == "\<Esc>" || newchar == "\<C-C>" || newchar == ""
     "   return s:beep()
     " endif
-  " endif
+  endif
   " let cb_save = &clipboard
   " set clipboard-=unnamed clipboard-=unnamedplus
   " let append = ""
@@ -449,10 +449,11 @@ function! s:dosurround(...) " {{{1
   "   let pcmd = "p"
   " endif
   call setreg('"',keeper,regtype)
-  " if newchar != ""
+  if newchar != ""
   "   let special = a:0 > 2 ? a:3 : 0
   "   call s:wrapreg('"',newchar,removed,special)
-  " endif
+    call s:wrapreg('"',newchar,"","") " (tmp)
+  endif
   silent exe 'norm! ""'.pcmd.'`['
   " if removed =~ '\n' || okeeper =~ '\n' || getreg('"') =~ '\n'
   "   call s:reindent()
@@ -470,17 +471,17 @@ function! s:dosurround(...) " {{{1
   " endif
 endfunction " }}}1
 
-" function! s:changesurround(...) " {{{1
-"   let a = s:inputtarget()
+function! s:changesurround(...) " {{{1
+  let a = s:inputtarget()
 "   if a == ""
 "     return s:beep()
 "   endif
-"   let b = s:inputreplacement()
+  let b = s:inputreplacement()
 "   if b == ""
 "     return s:beep()
 "   endif
-"   call s:dosurround(a,b,a:0 && a:1)
-" endfunction " }}}1
+  call s:dosurround(a,b,a:0 && a:1)
+endfunction " }}}1
 
 function! s:opfunc(type,...) " {{{1
   let char = s:inputreplacement()
@@ -567,7 +568,7 @@ endfunction " }}}1
 
 " nnoremap <silent> <Plug>SurroundRepeat .
 nnoremap <silent> <Plug>Dsurround  :<C-U>call <SID>dosurround(<SID>inputtarget())<CR>
-" nnoremap <silent> <Plug>Csurround  :<C-U>call <SID>changesurround()<CR>
+nnoremap <silent> <Plug>Csurround  :<C-U>call <SID>changesurround()<CR>
 " nnoremap <silent> <Plug>CSurround  :<C-U>call <SID>changesurround(1)<CR>
 nnoremap <silent> <Plug>Yssurround :<C-U>call <SID>opfunc(v:count1)<CR>
 " nnoremap <silent> <Plug>YSsurround :<C-U>call <SID>opfunc2(v:count1)<CR>
@@ -581,7 +582,7 @@ inoremap <silent> <Plug>Isurround  <C-R>=<SID>insert()<CR>
 
 if !exists("g:surround_no_mappings") || ! g:surround_no_mappings
   nmap ds  <Plug>Dsurround
-  " nmap cs  <Plug>Csurround
+  nmap cs  <Plug>Csurround
   " nmap cS  <Plug>CSurround
   nmap ys  <Plug>Ysurround
   " nmap yS  <Plug>YSurround
