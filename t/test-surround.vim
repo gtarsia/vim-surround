@@ -109,6 +109,13 @@ describe 'ys'
     Expect getline(1) == '<world>'
   end
 
+  it 'surrounds with slash'
+    put! = 'world'
+    Expect getline(1) == 'world'
+    normal ysiw/
+    Expect getline(1) == '/world/'
+  end
+
   it 'surrounds with spaces'
     put! = 'world'
     Expect getline(1) == 'world'

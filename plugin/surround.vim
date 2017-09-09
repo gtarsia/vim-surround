@@ -385,10 +385,10 @@ function! s:dosurround(...) " {{{1
   call setreg('"',"")
   let strcount = "" " (tmp)
   " let strcount = (scount == 1 ? "" : scount)
-  " if char == '/'
-    " exe 'norm! '.strcount.'[/d'.strcount.']/'
+  if char == '/'
+    exe 'norm! '.strcount.'[/d'.strcount.']/'
   " elseif char =~# '[[:punct:][:space:]]' && char !~# '[][(){}<>"''`]'
-  if char =~# '[[:space:]]' " (tmp)
+  elseif char =~# '[[:space:]]' " (tmp)
     exe 'norm! T'.char
     if getline('.')[col('.')-1] == char
       exe 'norm! l'
@@ -414,10 +414,10 @@ function! s:dosurround(...) " {{{1
   elseif char =~ "[\"'`]"
     exe "norm! i \<Esc>d2i".char
     " call setreg('"',substitute(getreg('"'),' ','',''))
-  " elseif char == '/'
-    " norm! "_x
+  elseif char == '/'
+    norm! "_x
     " call setreg('"','/**/',"c")
-    " let keeper = substitute(substitute(keeper,'^/\*\s\=','',''),'\s\=\*$','','')
+    let keeper = substitute(substitute(keeper,'^/\*\s\=','',''),'\s\=\*$','','')
   " elseif char =~# '[[:punct:][:space:]]' && char !~# '[][(){}<>]'
   elseif char =~# '[[:space:]]' " (tmp)
     exe 'norm! F'.char

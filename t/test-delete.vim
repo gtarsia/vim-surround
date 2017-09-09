@@ -128,6 +128,30 @@ describe 'ds'
     Expect getline(1) == '_ world _'
   end
 
+  it 'deletes surrounding C comment'
+    put! = '/* world */'
+    normal fw
+    normal ds/
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding C comment (mutliline)'
+    put = '/*'
+    put = 'hello'
+    put = 'world'
+    put = '*/'
+    Expect getline(2) == '/*'
+    Expect getline(3) == 'hello'
+    Expect getline(4) == 'world'
+    Expect getline(5) == '*/'
+    normal 3G
+    normal ds/
+    Expect getline(2) == ''
+    Expect getline(3) == 'hello'
+    Expect getline(4) == 'world'
+    Expect getline(5) == ''
+  end
+
   it 'deletes surrounding spaces, when cursor at the beginning of word'
     put! = 'hello world hello'
     normal fw
