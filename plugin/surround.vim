@@ -477,9 +477,9 @@ function! s:changesurround(...) " {{{1
 "     return s:beep()
 "   endif
   let b = s:inputreplacement()
-"   if b == ""
-"     return s:beep()
-"   endif
+  if b == ""
+    return s:beep()
+  endif
   call s:dosurround(a,b,a:0 && a:1)
 endfunction " }}}1
 
