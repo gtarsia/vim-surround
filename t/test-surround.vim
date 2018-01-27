@@ -402,4 +402,18 @@ describe 'ys'
   "   Expect getline(3) == ' oranges grapes)'
   " end
 
+  it 'aborts if you press <esc>'
+    put! = 'world'
+    execute "normal ysiw\<esc>"
+    execute "normal ihello, \<esc>"
+    Expect getline(1) == "hello, world"
+  end
+
+  it 'aborts if you press <c-c>'
+    put! = 'world'
+    execute "normal ysiw\<c-c>"
+    execute "normal ihello, \<esc>"
+    Expect getline(1) == "hello, world"
+  end
+
 end

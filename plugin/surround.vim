@@ -38,17 +38,17 @@ function! s:inputreplacement()
   if c == " "
     let c .= s:getchar()
   endif
-  " if c =~ "\<Esc>" || c =~ "\<C-C>"
-  "   return ""
-  " else
+  if c =~ "\<Esc>" || c =~ "\<C-C>"
+    return ""
+  else
     return c
-  " endif
+  endif
 endfunction
 
-" function! s:beep()
+function! s:beep()
 "   exe "norm! \<Esc>"
-"   return ""
-" endfunction
+  return ""
+endfunction
 
 " function! s:redraw()
 "   redraw
@@ -485,9 +485,9 @@ endfunction " }}}1
 
 function! s:opfunc(type,...) " {{{1
   let char = s:inputreplacement()
-"   if char == ""
-"     return s:beep()
-"   endif
+  if char == ""
+    return s:beep()
+  endif
   let reg = '"'
 "   let sel_save = &selection
 "   let &selection = "inclusive"
