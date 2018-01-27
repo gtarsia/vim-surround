@@ -26,11 +26,12 @@ function! s:inputtarget()
   " if c == " "
   "   let c .= s:getchar()
   " endif
-  " if c =~ "\<Esc>\|\<C-C>\|\0"
-  "   return ""
-  " else
+  if c =~ "\<Esc>" || c =~ "\<C-C>"
+  " if c =~ "\<Esc>\|\<C-C>\|\0" " bug? this regex doesn't seem to match
+    return ""
+  else
     return c
-  " endif
+  endif
 endfunction
 
 function! s:inputreplacement()
@@ -473,9 +474,9 @@ endfunction " }}}1
 
 function! s:changesurround(...) " {{{1
   let a = s:inputtarget()
-"   if a == ""
-"     return s:beep()
-"   endif
+  if a == ""
+    return s:beep()
+  endif
   let b = s:inputreplacement()
   if b == ""
     return s:beep()
