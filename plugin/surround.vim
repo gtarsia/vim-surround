@@ -254,6 +254,7 @@ function! s:wrap(string,char,type,removed,special)
   endif
   let after  = substitute(after ,'\n','\n'.initspaces,'g')
 "   if type ==# 'V' || (a:special && type ==# "v")
+  if a:special " (tmp)
 "     let before = substitute(before,' \+$','','')
 "     let after  = substitute(after ,'^ \+','','')
 "     if after !~ '^\n'
@@ -265,12 +266,12 @@ function! s:wrap(string,char,type,removed,special)
 "       let after = strpart(after,1)
 "     endif
 "     if before !~ '\n\s*$'
-"       let before .= "\n"
+      let before .= "\n"
 "       if a:special
-"         let before .= "\t"
+        let before .= "\t"
 "       endif
 "     endif
-"   endif
+  endif
 "   if type ==# 'V'
 "     let before = initspaces.before
 "   endif
@@ -504,7 +505,7 @@ function! s:opfunc(type,...) " {{{1
 "     silent exe 'norm! `[V`]"'.reg.'y'
 "     let type = 'V'
 "   elseif a:type ==# "v" || a:type ==# "V" || a:type ==# "\<C-V>"
-  elseif a:type ==# "v" " (tmp)
+  elseif a:type ==# "v" || a:type ==# "V" " (tmp)
 "     let &selection = sel_save
 "     let ve = &virtualedit
 "     if !(a:0 && a:1)

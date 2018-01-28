@@ -46,6 +46,14 @@ describe 'ys'
     Expect getline(1) == '(world)'
   end
 
+  it 'surrounds with parenthesis (visual line-wise)'
+    put! = 'world'
+    normal VS)
+    Expect getline(1) == '('
+    Expect getline(2) == "\tworld"
+    Expect getline(3) == ')'
+  end
+
   it 'surrounds with parenthesis and extra spaces'
     put! = 'world'
     Expect getline(1) == 'world'
