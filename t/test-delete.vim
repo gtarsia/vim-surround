@@ -9,6 +9,7 @@ describe 'ds'
 
   after
     close!
+    call setreg('"', '')
   end
 
   it 'deletes surrounding single quotes'

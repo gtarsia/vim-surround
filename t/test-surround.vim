@@ -9,6 +9,7 @@ describe 'ys'
 
   after
     close!
+    call setreg('"', '')
   end
 
   it 'surrounds with single quotes'
@@ -36,6 +37,12 @@ describe 'ys'
     put! = 'world'
     Expect getline(1) == 'world'
     normal ysiw)
+    Expect getline(1) == '(world)'
+  end
+
+  it 'surrounds with parenthesis (visual character-wise)'
+    put! = 'world'
+    normal viwS)
     Expect getline(1) == '(world)'
   end
 

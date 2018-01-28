@@ -9,6 +9,7 @@ describe 'cs'
 
   after
     close!
+    call setreg('"', '')
   end
 
   it 'changes surround'

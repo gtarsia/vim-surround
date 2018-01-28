@@ -504,12 +504,13 @@ function! s:opfunc(type,...) " {{{1
 "     silent exe 'norm! `[V`]"'.reg.'y'
 "     let type = 'V'
 "   elseif a:type ==# "v" || a:type ==# "V" || a:type ==# "\<C-V>"
+  elseif a:type ==# "v" " (tmp)
 "     let &selection = sel_save
 "     let ve = &virtualedit
 "     if !(a:0 && a:1)
 "       set virtualedit=
 "     endif
-"     silent exe 'norm! gv"'.reg.'y'
+    silent exe 'norm! gv"'.reg.'y'
 "     let &virtualedit = ve
   elseif a:type =~ '^\d\+$'
 "     let type = 'v'
@@ -576,7 +577,7 @@ nnoremap <silent> <Plug>Yssurround :<C-U>call <SID>opfunc(v:count1)<CR>
 " <C-U> discards the numerical argument but there's not much we can do with it
 nnoremap <silent> <Plug>Ysurround  :<C-U>set opfunc=<SID>opfunc<CR>g@
 " nnoremap <silent> <Plug>YSurround  :<C-U>set opfunc=<SID>opfunc2<CR>g@
-" vnoremap <silent> <Plug>VSurround  :<C-U>call <SID>opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
+vnoremap <silent> <Plug>VSurround  :<C-U>call <SID>opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
 " vnoremap <silent> <Plug>VgSurround :<C-U>call <SID>opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR>
 inoremap <silent> <Plug>Isurround  <C-R>=<SID>insert()<CR>
 " inoremap <silent> <Plug>ISurround  <C-R>=<SID>insert(1)<CR>
@@ -590,7 +591,7 @@ if !exists("g:surround_no_mappings") || ! g:surround_no_mappings
   nmap yss <Plug>Yssurround
   " nmap ySs <Plug>YSsurround
   " nmap ySS <Plug>YSsurround
-  " xmap S   <Plug>VSurround
+  xmap S   <Plug>VSurround
   " xmap gS  <Plug>VgSurround
   " if !exists("g:surround_no_insert_mappings") || ! g:surround_no_insert_mappings
   "   if !hasmapto("<Plug>Isurround","i") && "" == mapcheck("<C-S>","i")
