@@ -179,6 +179,20 @@ describe 'ds'
     Expect getline(1) == 'helloworldgood morning'
   end
 
+  it 'allows a count to reach an outer target (count=1)'
+    put! = '(_(_(world)_)_)'
+    normal fw
+    normal ds1)
+    Expect getline(1) == '(_(_world_)_)'
+  end
+
+  it 'allows a count to reach an outer target (count=2)'
+    put! = '(_(_(world)_)_)'
+    normal fw
+    normal ds2)
+    Expect getline(1) == '(__(world)__)'
+  end
+
   it 'ignores non-surrounding input character (clean reg)'
     call setreg('"', "")
     put! = '(world)'

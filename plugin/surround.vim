@@ -20,9 +20,9 @@ endfunction
 
 function! s:inputtarget()
   let c = s:getchar()
-  " while c =~ '^\d\+$'
-    " let c .= s:getchar()
-  " endwhile
+  while c =~ '^\d\+$'
+    let c .= s:getchar()
+  endwhile
   " if c == " "
   "   let c .= s:getchar()
   " endif
@@ -360,12 +360,13 @@ endfunction " }}}1
 
 function! s:dosurround(...) " {{{1
   " let scount = v:count1
+  let scount = 1 " (tmp)
   let char = a:1 "let char = (a:0 ? a:1 : s:inputtarget())
   " let spc = ""
-  " if char =~ '^\d\+'
-    " let scount = scount * matchstr(char,'^\d\+')
-    " let char = substitute(char,'^\d\+','','')
-  " endif
+  if char =~ '^\d\+'
+    let scount = scount * matchstr(char,'^\d\+')
+    let char = substitute(char,'^\d\+','','')
+  endif
   " if char =~ '^ '
   "   let char = strpart(char,1)
     " let spc = 1
@@ -389,8 +390,7 @@ function! s:dosurround(...) " {{{1
   let original = getreg('"')
   let otype = getregtype('"')
   call setreg('"',"")
-  let strcount = "" " (tmp)
-  " let strcount = (scount == 1 ? "" : scount)
+  let strcount = (scount == 1 ? "" : scount)
   if char == '/'
     exe 'norm! '.strcount.'[/d'.strcount.']/'
   " elseif char =~# '[[:punct:][:space:]]' && char !~# '[][(){}<>"''`]'

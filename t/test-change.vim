@@ -18,6 +18,20 @@ describe 'cs'
     Expect getline(1) == "[world]"
   end
 
+  it 'allows a count to reach an outer target (count=1)'
+    put! = '(_(_(world)_)_)'
+    normal fw
+    normal cs1)]
+    Expect getline(1) == '(_(_[world]_)_)'
+  end
+
+  it 'allows a count to reach an outer target (count=2)'
+    put! = '(_(_(world)_)_)'
+    normal fw
+    normal cs2)]
+    Expect getline(1) == '(_[_(world)_]_)'
+  end
+
   it 'aborts if you press <esc> when selecting current char'
     put! = '(world)'
     normal fl
