@@ -54,6 +54,19 @@ describe 'ys'
     Expect getline(3) == ')'
   end
 
+  it 'surrounds with parenthesis (visual block-wise)'
+    put! = '123456'
+    put  = '777888'
+    put  = '999000'
+    normal gg
+    normal f3
+    execute "normal \<c-v>2jl"
+    normal S)
+    Expect getline(1) == '12(34)56'
+    Expect getline(2) == '77(78)88'
+    Expect getline(3) == '99(90)00'
+  end
+
   it 'surrounds with parenthesis and extra spaces'
     put! = 'world'
     Expect getline(1) == 'world'

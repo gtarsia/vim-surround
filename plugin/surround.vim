@@ -129,7 +129,7 @@ function! s:wrap(string,char,type,removed,special)
   let keeper = a:string
   let newchar = a:char
 "   let s:input = ""
-"   let type = a:type
+  let type = a:type
 "   let linemode = type ==# 'V' ? 1 : 0
   let before = ""
   let after  = ""
@@ -286,14 +286,18 @@ function! s:wrap(string,char,type,removed,special)
 "   if type ==# 'V'
 "     let keeper = before.keeper.after
 "   elseif type =~ "^\<C-V>"
+  if type =~ "^\<C-V>" " (tmp)
 "     " Really we should be iterating over the buffer
 "     let repl = substitute(before,'[\\~]','\\&','g').'\1'.substitute(after,'[\\~]','\\&','g')
 "     let repl = substitute(repl,'\n',' ','g')
 "     let keeper = substitute(keeper."\n",'\(.\{-\}\)\(\n\)',repl.'\n','g')
 "     let keeper = substitute(keeper,'\n\%$','','')
-"   else
+    " surround each row of the block-wise selection
+    " for \{-}, see :help \{-
+    let keeper = substitute(keeper."\n",'\(.\{-}\)\n',before.'\1'.after.'\n','g') " (tmp)
+  else
     let keeper = before.extraspace.keeper.extraspace.after
-"   endif
+  endif
   return keeper
 endfunction
 
@@ -504,8 +508,7 @@ function! s:opfunc(type,...) " {{{1
 "   elseif a:type == "line"
 "     silent exe 'norm! `[V`]"'.reg.'y'
 "     let type = 'V'
-"   elseif a:type ==# "v" || a:type ==# "V" || a:type ==# "\<C-V>"
-  elseif a:type ==# "v" || a:type ==# "V" " (tmp)
+  elseif a:type ==# "v" || a:type ==# "V" || a:type ==# "\<C-V>"
 "     let &selection = sel_save
 "     let ve = &virtualedit
 "     if !(a:0 && a:1)
