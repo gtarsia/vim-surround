@@ -394,7 +394,7 @@ function! s:dosurround(...) " {{{1
   endif
   let keeper = getreg('"')
   " let okeeper = keeper " for reindent below
-  if keeper == ""
+  " if keeper == ""
     " call setreg('"',original,otype)
     " let &clipboard = cb_save
     " return ""
@@ -406,7 +406,8 @@ function! s:dosurround(...) " {{{1
   " elseif char ==# "s" || char ==# "w" || char ==# "W"
     " Do nothing
     " call setreg('"','')
-  elseif char =~ "[\"'`]"
+  " elseif char =~ "[\"'`]"
+  if char =~ "[\"'`]" " (tmp)
     exe "norm! i \<Esc>d2i".char
     " call setreg('"',substitute(getreg('"'),' ','',''))
   elseif char == '/'
