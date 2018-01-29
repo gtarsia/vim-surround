@@ -215,8 +215,7 @@ function! s:wrap(string,char,type,removed,special)
     let env = input('\begin{')
     if env != ""
 "       let s:input = env."\<CR>"
-      let env = '{' . env
-      let env .= s:closematch(env)
+      let env = '{' . env . '}'
 "       echo '\begin'.env
       let before = '\begin'.env
       let after  = '\end'.matchstr(env,'[^}]*').'}'
@@ -555,22 +554,6 @@ endfunction
 " function! s:opfunc2(arg)
 "   call s:opfunc(a:arg,1)
 " endfunction " }}}1
-
-function! s:closematch(str) " {{{1
-"   " Close an open (, {, [, or < on the command line.
-"   let tail = matchstr(a:str,'.[^\[\](){}<>]*$')
-"   if tail =~ '^\[.\+'
-"     return "]"
-"   elseif tail =~ '^(.\+'
-"     return ")"
-"   elseif tail =~ '^{.\+'
-    return "}"
-"   elseif tail =~ '^<.+'
-"     return ">"
-"   else
-"     return ""
-"   endif
-endfunction " }}}1
 
 " nnoremap <silent> <Plug>SurroundRepeat .
 nnoremap <silent> <Plug>Dsurround  :<C-U>call <SID>dosurround(<SID>inputtarget())<CR>
