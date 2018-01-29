@@ -179,6 +179,13 @@ describe 'ds'
     Expect getline(1) == 'helloworldgood morning'
   end
 
+  it 'deletes surrounding char and trims whitespace afterwards'
+    put! = ' [{  world  }] '
+    normal fw
+    execute "normal ds\<space>}"
+    Expect getline(1) == ' [world] '
+  end
+
   it 'allows a count to reach an outer target (count=1, before char)'
     put! = '(_(_(world)_)_)'
     normal fw

@@ -23,9 +23,9 @@ function! s:inputtarget()
   while c =~ '^\d\+$'
     let c .= s:getchar()
   endwhile
-  " if c == " "
-  "   let c .= s:getchar()
-  " endif
+  if c == " "
+    let c .= s:getchar()
+  endif
   if c =~ "\<Esc>" || c =~ "\<C-C>"
   " if c =~ "\<Esc>\|\<C-C>\|\0" " bug? this regex doesn't seem to match
     return ""
@@ -354,15 +354,15 @@ endfunction " }}}1
 function! s:dosurround(...) " {{{1
   let scount = v:count1
   let char = a:1
-  " let spc = ""
+  let spc = ""
   if char =~ '^\d\+'
     let scount = scount * matchstr(char,'^\d\+')
     let char = substitute(char,'^\d\+','','')
   endif
-  " if char =~ '^ '
-  "   let char = strpart(char,1)
-    " let spc = 1
-  " endif
+  if char =~ '^ '
+    let char = strpart(char,1)
+    let spc = 1
+  endif
   if char == 'a'
     let char = '>'
   endif
@@ -427,8 +427,7 @@ function! s:dosurround(...) " {{{1
   " let oldhead = strpart(oldline,0,strlen(oldline)-strlen(rem2))
   " let oldtail = strpart(oldline,  strlen(oldline)-strlen(rem2))
   let regtype = getregtype('"')
-  " if char =~# '[\[({<T]' || spc
-  if char =~# '[\[({<]' " (tmp)
+  if char =~# '[\[({<T]' || spc
     let keeper = substitute(keeper,'^\s\+','','')
     let keeper = substitute(keeper,'\s\+$','','')
   endif
