@@ -372,9 +372,6 @@ function! s:dosurround(...) " {{{1
   let newchar = ""
   if a:0 > 1
     let newchar = a:2
-    " if newchar == "\<Esc>" || newchar == "\<C-C>" || newchar == ""
-    "   return s:beep()
-    " endif
   endif
   " let cb_save = &clipboard
   " set clipboard-=unnamed clipboard-=unnamedplus
