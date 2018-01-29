@@ -51,11 +51,6 @@ function! s:beep()
   return ""
 endfunction
 
-" function! s:redraw()
-"   redraw
-"   return ""
-" endfunction
-
 " }}}1
 
 " Wrapping functions {{{1
