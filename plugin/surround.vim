@@ -353,8 +353,7 @@ endfunction " }}}1
 " endfunction " }}}1
 
 function! s:dosurround(...) " {{{1
-  " let scount = v:count1
-  let scount = 1 " (tmp)
+  let scount = v:count1
   let char = a:1 "let char = (a:0 ? a:1 : s:inputtarget())
   " let spc = ""
   if char =~ '^\d\+'

@@ -179,18 +179,32 @@ describe 'ds'
     Expect getline(1) == 'helloworldgood morning'
   end
 
-  it 'allows a count to reach an outer target (count=1)'
+  it 'allows a count to reach an outer target (count=1, before char)'
     put! = '(_(_(world)_)_)'
     normal fw
     normal ds1)
     Expect getline(1) == '(_(_world_)_)'
   end
 
-  it 'allows a count to reach an outer target (count=2)'
+  it 'allows a count to reach an outer target (count=2, before char)'
     put! = '(_(_(world)_)_)'
     normal fw
     normal ds2)
     Expect getline(1) == '(__(world)__)'
+  end
+
+  it 'allows a count to reach an outer target (count=2, before ds)'
+    put! = '(_(_(world)_)_)'
+    normal fw
+    normal 2ds)
+    Expect getline(1) == '(__(world)__)'
+  end
+
+  it 'allows a count to reach an outer target (combined counts)'
+    put! = '(_(_(_(_(_(world)_)_)_)_)_)'
+    normal fw
+    normal 3ds2)
+    Expect getline(1) == '_(_(_(_(_(world)_)_)_)_)_'
   end
 
   it 'ignores non-surrounding input character (clean reg)'
