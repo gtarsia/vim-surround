@@ -125,7 +125,6 @@ function! s:wrap(string,char,type,removed,special)
   let newchar = a:char
 "   let s:input = ""
   let type = a:type
-"   let linemode = type ==# 'V' ? 1 : 0
   let before = ""
   let after  = ""
 "   if type ==# "V"
