@@ -129,7 +129,140 @@ describe 'ds'
     Expect getline(1) == '_ world _'
   end
 
-  it 'deletes surrounding C comment'
+  it 'deletes surrounding exclamation points'
+    put! = '!world!'
+    normal fw
+    normal ds!
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding number signs'
+    put! = '#world#'
+    normal fw
+    normal ds#
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding dollar signs'
+    put! = '$world$'
+    normal fw
+    normal ds$
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding percent signs'
+    put! = '%world%'
+    normal fw
+    normal ds%
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding ampersands'
+    put! = '&world&'
+    normal fw
+    normal ds&
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding asterisks'
+    put! = '*world*'
+    normal fw
+    normal ds*
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding plus signs'
+    put! = '+world+'
+    normal fw
+    normal ds+
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding minus signs'
+    put! = '-world-'
+    normal fw
+    normal ds-
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding commas'
+    put! = ',world,'
+    normal fw
+    normal ds,
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding dots'
+    put! = '.world.'
+    normal fw
+    normal ds.
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding colons'
+    put! = ',world,'
+    normal fw
+    normal ds,
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding semicolons'
+    put! = ';world;'
+    normal fw
+    normal ds;
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding equals signs'
+    put! = '=world='
+    normal fw
+    normal ds=
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding question marks'
+    put! = '?world?'
+    normal fw
+    normal ds?
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding at signs'
+    put! = '@world@'
+    normal fw
+    normal ds@
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding carets'
+    put! = '^world^'
+    normal fw
+    normal ds^
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding underscores'
+    put! = '_world_'
+    normal fw
+    normal ds_
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding pipes'
+    put! = '\|world\|'
+    normal fw
+    normal ds|
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding tildes'
+    put! = '~world~'
+    normal fw
+    normal ds~
+    Expect getline(1) == 'world'
+  end
+
+  it 'deletes surrounding C comment (forward slash)'
     put! = '/* world */'
     normal fw
     normal ds/
