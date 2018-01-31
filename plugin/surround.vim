@@ -27,7 +27,6 @@ function! s:inputtarget()
     let c .= s:getchar()
   endif
   if c =~ "\<Esc>" || c =~ "\<C-C>"
-  " if c =~ "\<Esc>\|\<C-C>\|\0" " bug? this regex doesn't seem to match
     return ""
   else
     return c
