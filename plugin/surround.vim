@@ -483,8 +483,8 @@ function! s:opfunc(type,...) " {{{1
   let reg = '"'
 "   let sel_save = &selection
 "   let &selection = "inclusive"
-"   let cb_save  = &clipboard
-"   set clipboard-=unnamed clipboard-=unnamedplus
+  let cb_save  = &clipboard
+  set clipboard-=unnamed clipboard-=unnamedplus
   let reg_save = getreg(reg)
   let reg_type = getregtype(reg)
 "   let type = a:type
@@ -530,7 +530,7 @@ function! s:opfunc(type,...) " {{{1
 "   endif
   call setreg(reg,reg_save,reg_type)
 "   let &selection = sel_save
-"   let &clipboard = cb_save
+  let &clipboard = cb_save
 "   if a:type =~ '^\d\+$'
 "     silent! call repeat#set("\<Plug>Y".(a:0 && a:1 ? "S" : "s")."surround".char.s:input,a:type)
 "   else

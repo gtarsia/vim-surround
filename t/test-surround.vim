@@ -445,12 +445,46 @@ describe 'ys'
   end
 
   it 'preserves unnamed register'
+    set clipboard=
     call setreg('"', "something", "b")
     put! = 'world'
     normal ysiw)
     Expect getline(1) == '(world)'
+    Expect &clipboard == ''
     Expect getreg('"') == 'something'
     Expect getregtype('"') == "\x169"
+  end
+
+  it "preserves 'clipboard' setting"
+    set clipboard=unnamed,unnamedplus
+    " I also wanted to test that temporarily removing unnamed and unnamedplus
+    " (while surrounding) is important.
+    " Maybe this doesn't make sense at all because 'clipboard' is applicable to:
+    " {only in GUI versions or when the +xterm_clipboard feature is included}
+    " My terminal vim doesn't have that feature, but 'clipboard' did seem to
+    " work.
+    "
+    " My plan was to initially set reg " with a different value than reg *
+    " but settting * seems to overwrite " in the tests, but not in my vim
+    " maybe I'm missing some extra setting in tests or
+    " to be honest, I don't know if the tests run the same version of vim as I
+    " do
+    call setreg('"', "bananas", "b")
+    call setreg('*', "bananas", "b")
+    Expect getreg('"') == 'bananas'
+    Expect getreg('*') == 'bananas'
+    Expect getreg('+') == 'bananas'
+    put! = 'world'
+    normal ysiw)
+    Expect &clipboard == 'unnamed,unnamedplus'
+    Expect getline(1) == '(world)'
+    Expect getreg('"') == 'bananas'
+    " I don't know why this is \x167 and not \x169 like other tests
+    Expect getregtype('"') == "\x167"
+    Expect getreg('*') == 'bananas'
+    Expect getregtype('*') == "\x167"
+    Expect getreg('+') == 'bananas'
+    Expect getregtype('+') == "\x167"
   end
 
 end
