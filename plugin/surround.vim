@@ -485,8 +485,8 @@ function! s:opfunc(type,...) " {{{1
 "   let &selection = "inclusive"
 "   let cb_save  = &clipboard
 "   set clipboard-=unnamed clipboard-=unnamedplus
-"   let reg_save = getreg(reg)
-"   let reg_type = getregtype(reg)
+  let reg_save = getreg(reg)
+  let reg_type = getregtype(reg)
 "   let type = a:type
   if a:type == "char"
     silent exe 'norm! v`[o`]"'.reg.'y'
@@ -528,7 +528,7 @@ function! s:opfunc(type,...) " {{{1
 "   if type ==# 'V' || (getreg(reg) =~ '\n' && type ==# 'v')
 "     call s:reindent()
 "   endif
-"   call setreg(reg,reg_save,reg_type)
+  call setreg(reg,reg_save,reg_type)
 "   let &selection = sel_save
 "   let &clipboard = cb_save
 "   if a:type =~ '^\d\+$'

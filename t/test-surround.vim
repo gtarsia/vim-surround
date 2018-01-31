@@ -444,4 +444,13 @@ describe 'ys'
     Expect getline(1) == "hello, world"
   end
 
+  it 'preserves unnamed register'
+    call setreg('"', "something", "b")
+    put! = 'world'
+    normal ysiw)
+    Expect getline(1) == '(world)'
+    Expect getreg('"') == 'something'
+    Expect getregtype('"') == "\x169"
+  end
+
 end
