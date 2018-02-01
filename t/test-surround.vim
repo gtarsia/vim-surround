@@ -1,10 +1,11 @@
 source plugin/surround.vim
 source t/util/util.vim
 
-describe 'ys'
+describe 'surround'
 
   before
     new
+    set selection=inclusive
   end
 
   after
@@ -442,6 +443,23 @@ describe 'ys'
     execute "normal ysiw\<c-c>"
     execute "normal ihello, \<esc>"
     Expect getline(1) == "hello, world"
+  end
+
+  it "works when 'selection' exclusive and normal mode"
+    set selection=exclusive
+    put! = 'world'
+    Expect getline(1) == 'world'
+    normal ysiw)
+    Expect getline(1) == '(world)'
+    Expect &selection == 'exclusive'
+  end
+
+  it "works when 'selection' exclusive and visual mode"
+    set selection=exclusive
+    put! = 'world'
+    normal viwS)
+    Expect getline(1) == '(world)'
+    Expect &selection == 'exclusive'
   end
 
   it 'preserves unnamed register'

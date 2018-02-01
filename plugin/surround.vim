@@ -481,8 +481,8 @@ function! s:opfunc(type,...) " {{{1
     return s:beep()
   endif
   let reg = '"'
-"   let sel_save = &selection
-"   let &selection = "inclusive"
+  let sel_save = &selection
+  let &selection = "inclusive"
   let cb_save  = &clipboard
   set clipboard-=unnamed clipboard-=unnamedplus
   let reg_save = getreg(reg)
@@ -495,7 +495,7 @@ function! s:opfunc(type,...) " {{{1
 "     silent exe 'norm! `[V`]"'.reg.'y'
 "     let type = 'V'
   elseif a:type ==# "v" || a:type ==# "V" || a:type ==# "\<C-V>"
-"     let &selection = sel_save
+    let &selection = sel_save
 "     let ve = &virtualedit
 "     if !(a:0 && a:1)
 "       set virtualedit=
@@ -529,7 +529,7 @@ function! s:opfunc(type,...) " {{{1
 "     call s:reindent()
 "   endif
   call setreg(reg,reg_save,reg_type)
-"   let &selection = sel_save
+  let &selection = sel_save
   let &clipboard = cb_save
 "   if a:type =~ '^\d\+$'
 "     silent! call repeat#set("\<Plug>Y".(a:0 && a:1 ? "S" : "s")."surround".char.s:input,a:type)
