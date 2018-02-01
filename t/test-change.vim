@@ -5,11 +5,13 @@ describe 'cs'
 
   before
     new
+    set clipboard=
+    set selection=inclusive
+    call setreg('"', '')
   end
 
   after
     close!
-    call setreg('"', '')
   end
 
   it 'changes surround'

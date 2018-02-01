@@ -5,11 +5,13 @@ describe 'ds'
 
   before
     new
+    set clipboard=
+    set selection=inclusive
+    call setreg('"', '')
   end
 
   after
     close!
-    call setreg('"', '')
   end
 
   it 'deletes surrounding single quotes'
@@ -36,7 +38,6 @@ describe 'ds'
   it 'deletes surrounding parenthesis'
     put! = '_( world )_'
     normal f(
-    Expect CursorChar() == '('
     normal ds)
     Expect getline(1) == '_ world _'
   end
@@ -44,7 +45,6 @@ describe 'ds'
   it 'deletes surrounding parenthesis, trimming whitespaces'
     put! = '_( world )_'
     normal f(
-    Expect CursorChar() == '('
     normal ds(
     Expect getline(1) == '_world_'
   end
@@ -52,7 +52,6 @@ describe 'ds'
   it 'deletes surrounding parenthesis (aliased)'
     put! = '_( world )_'
     normal f(
-    Expect CursorChar() == '('
     normal dsb
     Expect getline(1) == '_ world _'
   end
@@ -60,7 +59,6 @@ describe 'ds'
   it 'deletes surrounding square brackets'
     put! = '_[ world ]_'
     normal f[
-    Expect CursorChar() == '['
     normal ds]
     Expect getline(1) == '_ world _'
   end
@@ -68,7 +66,6 @@ describe 'ds'
   it 'deletes surrounding square brackets, trimming whitespaces'
     put! = '_[ world ]_'
     normal f[
-    Expect CursorChar() == '['
     normal ds[
     Expect getline(1) == '_world_'
   end
@@ -76,7 +73,6 @@ describe 'ds'
   it 'deletes surrounding square brackets (aliased)'
     put! = '_[ world ]_'
     normal f[
-    Expect CursorChar() == '['
     normal dsr
     Expect getline(1) == '_ world _'
   end
@@ -84,7 +80,6 @@ describe 'ds'
   it 'deletes surrounding curly brackets'
     put! = '_{ world }_'
     normal f{
-    Expect CursorChar() == '{'
     normal ds}
     Expect getline(1) == '_ world _'
   end
@@ -92,7 +87,6 @@ describe 'ds'
   it 'deletes surrounding curly brackets, trimming whitespaces'
     put! = '_{ world }_'
     normal f{
-    Expect CursorChar() == '{'
     normal ds{
     Expect getline(1) == '_world_'
   end
@@ -100,7 +94,6 @@ describe 'ds'
   it 'deletes surrounding curly brackets (aliased)'
     put! = '_{ world }_'
     normal f{
-    Expect CursorChar() == '{'
     normal dsB
     Expect getline(1) == '_ world _'
   end
@@ -108,7 +101,6 @@ describe 'ds'
   it 'deletes surrounding angle brackets'
     put! = '_< world >_'
     normal f<
-    Expect CursorChar() == '<'
     normal ds>
     Expect getline(1) == '_ world _'
   end
@@ -116,7 +108,6 @@ describe 'ds'
   it 'deletes surrounding angle brackets, trimming whitespaces'
     put! = '_< world >_'
     normal f<
-    Expect CursorChar() == '<'
     normal ds<
     Expect getline(1) == '_world_'
   end
@@ -124,7 +115,6 @@ describe 'ds'
   it 'deletes surrounding angle brackets (aliased)'
     put! = '_< world >_'
     normal f<
-    Expect CursorChar() == '<'
     normal dsa
     Expect getline(1) == '_ world _'
   end
@@ -289,7 +279,6 @@ describe 'ds'
   it 'deletes surrounding spaces, when cursor at the beginning of word'
     put! = 'hello world hello'
     normal fw
-    Expect CursorChar() == 'w'
     execute "normal ds\<space>\<space>"
     Expect getline(1) == 'helloworldhello'
   end
@@ -297,7 +286,6 @@ describe 'ds'
   it 'deletes surrounding spaces, when cursor in the middle of word'
     put! = 'hello world hello'
     normal fr
-    Expect CursorChar() == 'r'
     execute "normal ds\<space>\<space>"
     Expect getline(1) == 'helloworldhello'
   end

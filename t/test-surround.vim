@@ -5,7 +5,9 @@ describe 'surround'
 
   before
     new
+    set clipboard=
     set selection=inclusive
+    call setreg('"', '')
   end
 
   after
@@ -326,7 +328,6 @@ describe 'surround'
     put! = 'world'
     Expect getline(1) == 'world'
     normal fl
-    Expect CursorChar() == 'l'
     execute "normal i\<C-G>s\<C-]>hello\<esc>"
     Expect getline(1) == "wor{"
     Expect getline(2) == "\thello"
@@ -382,7 +383,6 @@ describe 'surround'
     put! = 'hello, world!'
     Expect getline(1) == 'hello, world!'
     normal fw
-    Expect CursorChar() == 'w'
     execute 'normal yss)'
     Expect getline(1) == '(hello, world!)'
   end
@@ -391,7 +391,6 @@ describe 'surround'
     put! = '  hello, world!'
     Expect getline(1) == '  hello, world!'
     normal fw
-    Expect CursorChar() == 'w'
     execute 'normal yss)'
     Expect getline(1) == '  (hello, world!)'
     Expect CursorChar() == '('
