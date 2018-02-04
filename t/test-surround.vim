@@ -379,6 +379,19 @@ describe 'surround'
     Expect getline(1) == '(average 2 3 5)'
   end
 
+  it 'operates on linewise motion'
+    set filetype=vim
+    put! = 'hello'
+    put  = 'good'
+    put  = 'morning'
+    normal ys2k)
+    Expect getline(1) == '('
+    Expect getline(2) == "hello"
+    Expect getline(3) == "good"
+    Expect getline(4) == "morning"
+    Expect getline(5) == ')'
+  end
+
   it "operates on the current line ('yss')"
     put! = 'hello, world!'
     Expect getline(1) == 'hello, world!'

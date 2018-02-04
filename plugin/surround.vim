@@ -246,7 +246,7 @@ function! s:wrap(string,char,type,removed,special)
   endif
   let after  = substitute(after ,'\n','\n'.initspaces,'g')
 "   if type ==# 'V' || (a:special && type ==# "v")
-  if a:special " (tmp)
+  if type ==# 'V' || (a:special) " (tmp)
 "     let before = substitute(before,' \+$','','')
 "     let after  = substitute(after ,'^ \+','','')
 "     if after !~ '^\n'
@@ -259,9 +259,9 @@ function! s:wrap(string,char,type,removed,special)
 "     endif
 "     if before !~ '\n\s*$'
       let before .= "\n"
-"       if a:special
+      if a:special
         let before .= "\t"
-"       endif
+      endif
 "     endif
   endif
 "   if type ==# 'V'
@@ -491,8 +491,8 @@ function! s:opfunc(type,...) " {{{1
   if a:type == "char"
     silent exe 'norm! v`[o`]"'.reg.'y'
 "     let type = 'v'
-"   elseif a:type == "line"
-"     silent exe 'norm! `[V`]"'.reg.'y'
+  elseif a:type == "line"
+    silent exe 'norm! `[V`]"'.reg.'y'
 "     let type = 'V'
   elseif a:type ==# "v" || a:type ==# "V" || a:type ==# "\<C-V>"
     let &selection = sel_save
