@@ -49,14 +49,6 @@ describe 'surround'
     Expect getline(1) == '(world)'
   end
 
-  it 'surrounds with parenthesis (visual line-wise)'
-    put! = 'world'
-    normal VS)
-    Expect getline(1) == '('
-    Expect getline(2) == "\tworld"
-    Expect getline(3) == ')'
-  end
-
   it 'surrounds with parenthesis (visual block-wise)'
     put! = '123456'
     put  = '777888'
@@ -385,11 +377,46 @@ describe 'surround'
     put  = 'good'
     put  = 'morning'
     normal ys2k)
+    " puts the surrounding chars in separate lines
     Expect getline(1) == '('
     Expect getline(2) == "hello"
     Expect getline(3) == "good"
     Expect getline(4) == "morning"
     Expect getline(5) == ')'
+  end
+
+  it 'surrounds on visual linewise (1)'
+    put! = 'world'
+    normal VS)
+    " puts the surrounding chars in separate lines
+    Expect getline(1) == '('
+    Expect getline(2) == "\tworld"
+    Expect getline(3) == ')'
+  end
+
+  it 'surrounds on visual linewise (2)'
+    put! = 'world'
+    normal VS(
+    " should trim trailing whitespaces
+    " (\s => (
+    Expect getline(1) == '('
+    Expect getline(2) == "\tworld"
+    " should trim leading whitespaces
+    " \s) => )
+    Expect getline(3) == ')'
+  end
+
+  it 'surrounds on visual linewise (3)'
+    put! = 'hello'
+    put  = 'world'
+    " buffer custom template for '-' (ASCII 45)
+    let b:surround_45 = "<?php          \r          ?>"
+    normal VkS-
+    " puts the surrounding chars in separate lines, trimming whitespaces
+    Expect getline(1) == '<?php'
+    Expect getline(2) == "\thello"
+    Expect getline(3) == "world"
+    Expect getline(4) == '?>'
   end
 
   it "operates on the current line ('yss')"

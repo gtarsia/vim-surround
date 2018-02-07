@@ -247,8 +247,8 @@ function! s:wrap(string,char,type,removed,special)
   let after  = substitute(after ,'\n','\n'.initspaces,'g')
 "   if type ==# 'V' || (a:special && type ==# "v")
   if type ==# 'V' || (a:special) " (tmp)
-"     let before = substitute(before,' \+$','','')
-"     let after  = substitute(after ,'^ \+','','')
+    let before = substitute(before,' \+$','','')
+    let after  = substitute(after ,'^ \+','','')
 "     if after !~ '^\n'
 "       let after  = initspaces.after
 "     endif
