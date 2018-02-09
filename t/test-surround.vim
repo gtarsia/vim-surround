@@ -482,6 +482,20 @@ describe 'surround'
     Expect getline(5) == '    )'
   end
 
+  it "surrounds on visual linewise; 'extra space' feature has no effect"
+    set expandtab
+    set shiftwidth=2
+    let b:surround_indent=0
+    put! = 'world'
+    " Compare with ysiw\<space>a
+    execute "normal VS\<space>a"
+    " As opposed to '< '
+    Expect getline(1) == '<'
+    Expect getline(2) == "  world"
+    " As opposed to ' >'
+    Expect getline(3) == '>'
+  end
+
   it "operates on the current line ('yss')"
     put! = 'hello, world!'
     Expect getline(1) == 'hello, world!'

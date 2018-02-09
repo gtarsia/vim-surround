@@ -279,10 +279,9 @@ function! s:wrap(string,char,type,removed,special)
     let before  = substitute(before,'\n\s\+\%$','\n','')
     let keeper = s:fixindent(keeper,padding)
   endif
-"   if type ==# 'V'
-"     let keeper = before.keeper.after
-"   elseif type =~ "^\<C-V>"
-  if type =~ "^\<C-V>" " (tmp)
+  if type ==# 'V'
+    let keeper = before.keeper.after
+  elseif type =~ "^\<C-V>"
 "     " Really we should be iterating over the buffer
 "     let repl = substitute(before,'[\\~]','\\&','g').'\1'.substitute(after,'[\\~]','\\&','g')
 "     let repl = substitute(repl,'\n',' ','g')
