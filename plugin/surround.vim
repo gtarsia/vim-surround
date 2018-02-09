@@ -250,7 +250,7 @@ function! s:wrap(string,char,type,removed,special)
   endif
   let after  = substitute(after ,'\n','\n'.initspaces,'g')
 "   if type ==# 'V' || (a:special && type ==# "v")
-  if type ==# 'V' || (a:special) " (tmp)
+  if type ==# 'V' " (tmp)
     let before = substitute(before,' \+$','','')
     let after  = substitute(after ,'^ \+','','')
 "     if after !~ '^\n'
