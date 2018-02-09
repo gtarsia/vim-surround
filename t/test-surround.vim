@@ -187,21 +187,33 @@ describe 'surround'
   end
 
   it 'surrounds with tag in separate lines'
+    set expandtab
+    set shiftwidth=2
     put! = 'hello'
-    Expect getline(1) == 'hello'
     execute "normal ysiw\<C-T>div\<cr>"
     Expect getline(1) == "<div>"
-    Expect getline(2) == "\thello"
+    Expect getline(2) == "  hello"
     Expect getline(3) == "</div>"
   end
 
-  it 'surrounds with tag in separate lines, indented'
-    put! = '		hello'
-    Expect getline(1) == "\t\thello"
+  it 'surrounds with tag in separate lines, indented (1)'
+    set expandtab
+    set shiftwidth=2
+    put! = '    hello'
     execute "normal ysiw\<C-T>div\<cr>"
-    Expect getline(1) == "\t\t<div>"
-    Expect getline(2) == "\t\t\thello"
-    Expect getline(3) == "\t\t</div>"
+    Expect getline(1) == "    <div>"
+    Expect getline(2) == "      hello"
+    Expect getline(3) == "    </div>"
+  end
+
+  it 'surrounds with tag in separate lines, indented (2)'
+    set expandtab
+    set shiftwidth=4
+    put! = '    hello'
+    execute "normal ysiw\<C-T>div\<cr>"
+    Expect getline(1) == "    <div>"
+    Expect getline(2) == "        hello"
+    Expect getline(3) == "    </div>"
   end
 
   it 'surrounds with tag that has attributes'
@@ -317,12 +329,13 @@ describe 'surround'
   end
 
   it 'surrounds cursor with curly braces in insert mode'
+    set expandtab
+    set shiftwidth=2
     put! = 'world'
-    Expect getline(1) == 'world'
     normal fl
     execute "normal i\<C-G>s\<C-]>hello\<esc>"
     Expect getline(1) == "wor{"
-    Expect getline(2) == "\thello"
+    Expect getline(2) == "  hello"
     Expect getline(3) == "}ld"
   end
 
@@ -386,36 +399,45 @@ describe 'surround'
   end
 
   it 'surrounds on visual linewise (1)'
+    set expandtab
+    set shiftwidth=2
+    let b:surround_indent=0
     put! = 'world'
     normal VS)
     " puts the surrounding chars in separate lines
     Expect getline(1) == '('
-    Expect getline(2) == "\tworld"
+    Expect getline(2) == "  world"
     Expect getline(3) == ')'
   end
 
   it 'surrounds on visual linewise (2)'
+    set expandtab
+    set shiftwidth=2
+    let b:surround_indent=0
     put! = 'world'
     normal VS(
     " should trim trailing whitespaces
     " (\s => (
     Expect getline(1) == '('
-    Expect getline(2) == "\tworld"
+    Expect getline(2) == "  world"
     " should trim leading whitespaces
     " \s) => )
     Expect getline(3) == ')'
   end
 
   it 'surrounds on visual linewise (3)'
-    put! = 'hello'
-    put  = 'world'
+    set expandtab
+    set shiftwidth=2
     " buffer custom template for '-' (ASCII 45)
     let b:surround_45 = "<?php          \r          ?>"
+    let b:surround_indent=0
+    put! = 'hello'
+    put  = 'world'
     normal VkS-
     " puts the surrounding chars in separate lines, trimming whitespaces
     Expect getline(1) == '<?php'
-    Expect getline(2) == "\thello"
-    Expect getline(3) == "world"
+    Expect getline(2) == "  hello"
+    Expect getline(3) == "  world"
     Expect getline(4) == '?>'
   end
 

@@ -70,15 +70,19 @@ function! s:extractafter(str)
 "   endif
 endfunction
 
-" function! s:fixindent(str,spc)
-"   let str = substitute(a:str,'\t',repeat(' ',&sw),'g')
-"   let spc = substitute(a:spc,'\t',repeat(' ',&sw),'g')
-"   let str = substitute(str,'\(\n\|\%^\).\@=','\1'.spc,'g')
+function! s:fixindent(str,spc)
+  let str = substitute(a:str,'\t',repeat(' ',&sw),'g')
+  let spc = substitute(a:spc,'\t',repeat(' ',&sw),'g')
+  " prepend each line with a certain number of spaces (spc)
+  " \%^ => \%^ . spc
+  " \n => \n . spc
+  " (except for a \n at the end of the string)
+  let str = substitute(str,'\(\n\|\%^\).\@=','\1'.spc,'g')
 "   if ! &et
 "     let str = substitute(str,'\s\{'.&ts.'\}',"\t",'g')
 "   endif
-"   return str
-" endfunction
+  return str
+endfunction
 
 function! s:process(string)
 "   let i = 0
@@ -271,9 +275,9 @@ function! s:wrap(string,char,type,removed,special)
 "     if type ==# 'v'
       let keeper = initspaces.keeper
 "     endif
-"     let padding = matchstr(before,'\n\zs\s\+\%$')
-"     let before  = substitute(before,'\n\s\+\%$','\n','')
-"     let keeper = s:fixindent(keeper,padding)
+    let padding = matchstr(before,'\n\zs\s\+\%$')
+    let before  = substitute(before,'\n\s\+\%$','\n','')
+    let keeper = s:fixindent(keeper,padding)
   endif
 "   if type ==# 'V'
 "     let keeper = before.keeper.after
