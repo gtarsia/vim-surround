@@ -254,7 +254,7 @@ function! s:wrap(string,char,type,removed,special)
     let before = substitute(before,' \+$','','')
     let after  = substitute(after ,'^ \+','','')
 "     if after !~ '^\n'
-"       let after  = initspaces.after
+      let after  = initspaces.after
 "     endif
 "     if keeper !~ '\n$' && after !~ '^\n'
 "       let keeper .= "\n"
@@ -268,13 +268,13 @@ function! s:wrap(string,char,type,removed,special)
       endif
 "     endif
   endif
-"   if type ==# 'V'
-"     let before = initspaces.before
-"   endif
+  if type ==# 'V'
+    let before = initspaces.before
+  endif
   if before =~ '\n\s*\%$'
-"     if type ==# 'v'
+    if type ==# 'v'
       let keeper = initspaces.keeper
-"     endif
+    endif
     let padding = matchstr(before,'\n\zs\s\+\%$')
     let before  = substitute(before,'\n\s\+\%$','\n','')
     let keeper = s:fixindent(keeper,padding)

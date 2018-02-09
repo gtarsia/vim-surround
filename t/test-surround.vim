@@ -441,6 +441,47 @@ describe 'surround'
     Expect getline(4) == '?>'
   end
 
+  it 'surrounds on visual linewise, preserving padding (1)'
+    set expandtab
+    set shiftwidth=2
+    let b:surround_indent=0
+    put! = '    hello'
+    put  = '  good'
+    put  = '  morning'
+    " start visual mode from top to bottom
+    normal gg
+    normal V2jS)
+    " - the surrounding chars will be in separate lines
+    " - the surrounding chars will be at the same level of indentation as
+    " the first line
+    " - the target lines will be indented one level deeper
+    Expect getline(1) == '    ('
+    Expect getline(2) == "      hello"
+    Expect getline(3) == "    good"
+    Expect getline(4) == "    morning"
+    Expect getline(5) == '    )'
+  end
+
+  it 'surrounds on visual linewise, preserving padding (2)'
+    set expandtab
+    set shiftwidth=2
+    let b:surround_indent=0
+    put! = '    hello'
+    put  = '  good'
+    put  = '  morning'
+    " start visual mode from bottom to top
+    normal V2kS)
+    " - the surrounding chars will be in separate lines
+    " - the surrounding chars will be at the same level of indentation as
+    " the first line
+    " - the target lines will be indented one level deeper
+    Expect getline(1) == '    ('
+    Expect getline(2) == "      hello"
+    Expect getline(3) == "    good"
+    Expect getline(4) == "    morning"
+    Expect getline(5) == '    )'
+  end
+
   it "operates on the current line ('yss')"
     put! = 'hello, world!'
     Expect getline(1) == 'hello, world!'
