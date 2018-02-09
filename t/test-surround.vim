@@ -530,6 +530,27 @@ describe 'surround'
     Expect getline(5) == '    </div>'
   end
 
+  it 'surrounds on visual linewise, preserving padding (4); paragraph'
+    set expandtab
+    set shiftwidth=2
+    let b:surround_indent=0
+    put! = '    hello'
+    put  = '  good'
+    put  = '  morning'
+    normal gg
+    normal V2jSp
+    " - the surrounding chars will be in separate lines
+    " - the surrounding chars will be at the same level of indentation as
+    " the first line
+    " - the target lines will *not* be indented any further
+    Expect getline(1) == '    '
+    Expect getline(2) == "    hello"
+    Expect getline(3) == "  good"
+    Expect getline(4) == "  morning"
+    Expect getline(5) == '    '
+    Expect getline(6) == '    '
+  end
+
   it "surrounds on visual linewise; 'extra space' feature has no effect"
     set expandtab
     set shiftwidth=2
