@@ -186,7 +186,7 @@ describe 'surround'
     Expect getline(1) == '<div>hello</div>'
   end
 
-  it 'surrounds with tag in separate lines'
+  it 'surrounds with tag in separate lines (<c-t> mapping)'
     set expandtab
     set shiftwidth=2
     put! = 'hello'
@@ -194,6 +194,21 @@ describe 'surround'
     Expect getline(1) == "<div>"
     Expect getline(2) == "  hello"
     Expect getline(3) == "</div>"
+  end
+
+  it 'surrounds with tags (visual block-wise); <c-t> has no extra effect'
+    put! = '<div>32</div>'
+    put  = '<div>53</div>'
+    put  = '<div>74</div>'
+    normal gg
+    normal f3
+    execute "normal \<c-v>2jl"
+    execute "normal S\<C-T>p\<cr>"
+    " In normal mode, it surrounds in separate lines
+    " In visual block, it simply surrounds inline
+    Expect getline(1) == '<div><p>32</p></div>'
+    Expect getline(2) == '<div><p>53</p></div>'
+    Expect getline(3) == '<div><p>74</p></div>'
   end
 
   it 'surrounds with tag in separate lines, indented (et, sw=2)'

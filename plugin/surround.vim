@@ -199,9 +199,9 @@ function! s:wrap(string,char,type,removed,special)
         let after  = '</'.substitute(tag,' .*','','').'>'
       endif
       if newchar == "\<C-T>"
-"         if type ==# "v" || type ==# "V"
+        if type ==# "v" || type ==# "V"
           let before .= "\n\t"
-"         endif
+        endif
         if type ==# "v"
           let after  = "\n". after
         endif
