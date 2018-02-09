@@ -78,9 +78,9 @@ function! s:fixindent(str,spc)
   " \n => \n . spc
   " (except for a \n at the end of the string)
   let str = substitute(str,'\(\n\|\%^\).\@=','\1'.spc,'g')
-"   if ! &et
-"     let str = substitute(str,'\s\{'.&ts.'\}',"\t",'g')
-"   endif
+  if ! &et
+    let str = substitute(str,'\s\{'.&ts.'\}',"\t",'g')
+  endif
   return str
 endfunction
 

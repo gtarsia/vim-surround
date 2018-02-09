@@ -196,7 +196,7 @@ describe 'surround'
     Expect getline(3) == "</div>"
   end
 
-  it 'surrounds with tag in separate lines, indented (1)'
+  it 'surrounds with tag in separate lines, indented (et, sw=2)'
     set expandtab
     set shiftwidth=2
     put! = '    hello'
@@ -206,7 +206,7 @@ describe 'surround'
     Expect getline(3) == "    </div>"
   end
 
-  it 'surrounds with tag in separate lines, indented (2)'
+  it 'surrounds with tag in separate lines, indented (et, sw=4)'
     set expandtab
     set shiftwidth=4
     put! = '    hello'
@@ -214,6 +214,19 @@ describe 'surround'
     Expect getline(1) == "    <div>"
     Expect getline(2) == "        hello"
     Expect getline(3) == "    </div>"
+  end
+
+  it 'surrounds with tag in separate lines, indented (noet, sw=4, ts=4)'
+    set noexpandtab
+    set shiftwidth=4
+    set tabstop=4
+    let b:surround_indent=0
+    put! = '		hello'
+    Expect getline(1) == "\t\thello"
+    execute "normal ysiw\<C-T>div\<cr>"
+    Expect getline(1) == "\t\t<div>"
+    Expect getline(2) == "\t\t\thello"
+    Expect getline(3) == "\t\t</div>"
   end
 
   it 'surrounds with tag that has attributes'
