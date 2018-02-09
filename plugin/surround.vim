@@ -202,9 +202,9 @@ function! s:wrap(string,char,type,removed,special)
 "         if type ==# "v" || type ==# "V"
           let before .= "\n\t"
 "         endif
-"         if type ==# "v"
+        if type ==# "v"
           let after  = "\n". after
-"         endif
+        endif
       endif
     endif
   elseif newchar ==# 'l' || newchar == '\'
@@ -261,12 +261,12 @@ function! s:wrap(string,char,type,removed,special)
 "     elseif keeper =~ '\n$' && after =~ '^\n'
 "       let after = strpart(after,1)
 "     endif
-"     if before !~ '\n\s*$'
+    if before !~ '\n\s*$'
       let before .= "\n"
       if a:special
         let before .= "\t"
       endif
-"     endif
+    endif
   endif
   if type ==# 'V'
     let before = initspaces.before
