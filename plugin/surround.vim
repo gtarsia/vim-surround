@@ -130,11 +130,7 @@ function! s:wrap(string,char,type,removed,special)
   let type = a:type
   let before = ""
   let after  = ""
-"   if type ==# "V"
-"     let initspaces = matchstr(keeper,'\%^\s*')
-"   else
-    let initspaces = matchstr(getline('.'),'\%^\s*')
-"   endif
+  let initspaces = matchstr(getline('.'),'\%^\s*')
   let pairs = "b()B{}r[]a<>"
   let extraspace = ""
   if newchar =~ '^ '
