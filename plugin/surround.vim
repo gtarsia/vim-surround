@@ -209,7 +209,7 @@ function! s:wrap(string,char,type,removed,special)
     if env != ""
 "       let s:input = env."\<CR>"
       let env = '{' . env . '}'
-"       echo '\begin'.env
+      echo '\begin'.env
       let before = '\begin'.env
       let after  = '\end'.matchstr(env,'[^}]*').'}'
     endif
