@@ -55,19 +55,19 @@ endfunction
 " Wrapping functions {{{1
 
 function! s:extractbefore(str)
-"   if a:str =~ '\r'
+  if a:str =~ '\r'
     return matchstr(a:str,'.*\ze\r')
-"   else
-"     return matchstr(a:str,'.*\ze\n')
-"   endif
+  else
+    return matchstr(a:str,'.*\ze\n')
+  endif
 endfunction
 
 function! s:extractafter(str)
-"   if a:str =~ '\r'
+  if a:str =~ '\r'
     return matchstr(a:str,'\r\zs.*')
-"   else
-"     return matchstr(a:str,'\n\zs.*')
-"   endif
+  else
+    return matchstr(a:str,'\n\zs.*')
+  endif
 endfunction
 
 function! s:fixindent(str,spc)

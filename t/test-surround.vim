@@ -367,40 +367,56 @@ describe 'surround'
     Expect getline(3) == "}ld"
   end
 
-  it 'surrounds with buffer custom template'
-    put! = 'world'
-    Expect getline(1) == 'world'
+  it 'surrounds with buffer custom template (\r placeholder)'
     " buffer custom template for '-' (ASCII 45)
+    " content will be at \r
     let b:surround_45 = "<?php \r ?>"
+    put! = 'world'
     execute 'normal ysiw-'
     Expect getline(1) == '<?php world ?>'
   end
 
-  it 'surrounds with global custom template'
+  it 'surrounds with buffer custom template (\n placeholder)'
+    " buffer custom template for '-' (ASCII 45)
+    " content will be at \n
+    let b:surround_45 = "<?php hello, \n ?>"
     put! = 'world'
-    Expect getline(1) == 'world'
+    execute 'normal ysiw-'
+    Expect getline(1) == '<?php hello, world ?>'
+    " Note:
+    " if you have multiple \n's then the result is a bit weird:
+    " let b:surround_45 = "<?php good\n morning\n?>"
+    " outputs:
+    "<?php good
+    " morningworld morning
+    "?>
+    " see:
+    " echo matchstr("<?php good\n morning\n?>",'.*\ze\n')
+    " echo matchstr("<?php good\n morning\n?>",'\n\zs.*')
+  end
+
+  it 'surrounds with global custom template'
     " global custom template for '-' (ASCII 45)
     let g:surround_45 = "<?php \r ?>"
+    put! = 'world'
     execute 'normal ysiw-'
     Expect getline(1) == '<?php world ?>'
   end
 
   it 'overrides global template with buffer template'
-    put! = 'world'
-    Expect getline(1) == 'world'
     " global custom template for '-' (ASCII 45)
     let g:surround_45 = "<?php \r ?>"
     " buffer custom template for '-' (ASCII 45)
     let b:surround_45 = "<?perl \r ?>"
+    put! = 'world'
     execute 'normal ysiw-'
     Expect getline(1) == '<?perl world ?>'
   end
 
   it 'overrides default surround with buffer custom template'
-    put! = 'world'
-    Expect getline(1) == 'world'
     " buffer custom template for ')' (ASCII 41)
     let b:surround_41 = "<?php \r ?>"
+    put! = 'world'
     execute 'normal ysiw)'
     Expect getline(1) == '<?php world ?>'
   end
