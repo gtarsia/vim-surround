@@ -398,13 +398,12 @@ function! s:dosurround(...) " {{{1
   " endif
   " let oldline = getline('.')
   " let oldlnum = line('.')
-  " if char ==# "p"
+  if char ==# "p"
     " call setreg('"','','V')
   " elseif char ==# "s" || char ==# "w" || char ==# "W"
     " Do nothing
     " call setreg('"','')
-  " elseif char =~ "[\"'`]"
-  if char =~ "[\"'`]" " (tmp)
+  elseif char =~ "[\"'`]"
     exe "norm! i \<Esc>d2i".char
     " call setreg('"',substitute(getreg('"'),' ','',''))
   elseif char == '/'

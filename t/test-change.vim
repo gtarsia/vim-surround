@@ -20,6 +20,21 @@ describe 'cs'
     Expect getline(1) == "[world]"
   end
 
+  it 'changes surrounding paragraph'
+    let b:surround_indent=0
+    put! = 'hello'
+    put  = ''
+    put  = 'good'
+    put  = 'morning'
+    normal csp]
+    Expect getline(1) == 'hello'
+    Expect getline(2) == ''
+    Expect getline(3) == '['
+    Expect getline(4) == 'good'
+    Expect getline(5) == 'morning'
+    Expect getline(6) == ']'
+  end
+
   it 'allows a count to reach an outer target (count=1, before char)'
     put! = '(_(_(world)_)_)'
     normal fw
